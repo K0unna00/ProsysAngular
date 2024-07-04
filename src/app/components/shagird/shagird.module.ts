@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShagirdComponent } from './shagird.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,10 @@ import { ShagirdComponent } from './shagird.component';
     ShagirdComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      { path: "", component: ShagirdComponent }
+    ])
   ]
 })
 export class ShagirdModule { }

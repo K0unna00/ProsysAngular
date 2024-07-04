@@ -7,7 +7,9 @@ import { ShagirdComponent } from './components/shagird/shagird.component';
 const routes: Routes = [
   {path: "ders", component: DersComponent},
   {path: "imtahan", component: ImtahanComponent},
-  {path: "shagird", component: ShagirdComponent}
+  {path: "shagird", component: ShagirdComponent},
+
+  {path: "**" , redirectTo:"ders"}
 ];
 
 @NgModule({

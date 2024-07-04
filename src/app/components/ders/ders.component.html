@@ -3,7 +3,7 @@
         <div class="component-header-text h2">
             Dərslər
         </div>
-        <div class="component-create-button">
+        <div class="component-crud-button " (click)="crudPopupVisible = true">
             <i class="fa-solid fa-square-plus"></i>
             Əlavə et
         </div>
@@ -42,7 +42,23 @@
             </tr>
           </table>
     </div>
-    <div class="component-create-popup">
+</div>
 
-    </div>
+<div *ngIf="crudPopupVisible" class="component-crud-popup">
+    <div class="component-crud-popup-main">
+      <div class="component-crud-popup-header w-100 d-flex justify-content-end">
+        <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </div>
+
+      <div class="component-crud-popup-body">
+        <form action="">
+          <input type="text" placeholder="Dərsin adı">
+          <input type="text" placeholder="Dərsin adı">
+          <input type="text" placeholder="Dərsin adı">
+          <input type="text" placeholder="Dərsin adı">
+        </form>
+      </div>
+    </div>    
 </div>

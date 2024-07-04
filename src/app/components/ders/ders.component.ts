@@ -12,6 +12,8 @@ export class DersComponent implements OnInit {
 
   }
 
+  public crudPopupVisible : boolean = false;
+
   ngOnInit(): void {
     
   }

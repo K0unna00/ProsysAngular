@@ -14,7 +14,7 @@
         margin: 0;
         padding: 0;
     }
-    .component-create-button {
+    .component-crud-button {
         appearance: none;
         background-color: #2ea44f;
         border: 1px solid rgba(27, 31, 35, .15);
@@ -40,32 +40,31 @@
       //   font-size: 2px;
       }
       
-      .component-create-button:focus:not(:focus-visible):not(.focus-visible) {
+      .component-crud-button:focus:not(:focus-visible):not(.focus-visible) {
         box-shadow: none;
         outline: none;
       }
       
-      .component-create-button:hover {
+      .component-crud-button:hover {
         background-color: #2c974b;
       }
       
-      .component-create-button:focus {
+      .component-crud-button:focus {
         box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
         outline: none;
       }
       
-      .component-create-button:disabled {
+      .component-crud-button:disabled {
         background-color: #94d3a2;
         border-color: rgba(27, 31, 35, .1);
         color: rgba(255, 255, 255, .8);
         cursor: default;
       }
       
-      .component-create-button:active {
+      .component-crud-button:active {
         background-color: #298e46;
         box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
       }
-
       
       .component-body{
           width: 100%;
@@ -110,4 +109,33 @@
         }
       }
 }
+.component-crud-popup{
 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7e7e7e8a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .component-crud-popup-main{
+    min-width: 45%;
+    min-height: 45%;
+    background-color: #76ca8a;
+    border-radius: 5px;
+  }
+}
+
+.crud-popup-close-button{
+  width: 40px;
+  height: 40px;
+  margin: 8px;
+  border-radius: 4px;
+}
+
+.component-crud-popup-body{
+  
+}
