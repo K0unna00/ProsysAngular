@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: "imtahan", component: ImtahanComponent},
   {path: "shagird", component: ShagirdComponent},
 
-  {path: "**" , redirectTo:"ders"}
+  // {path: "**" , redirectTo:"ders"}
 ];
 
 @NgModule({

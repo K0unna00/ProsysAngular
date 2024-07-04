@@ -1,64 +1,84 @@
 <div class="component-main">
-    <div class="component-header">
-        <div class="component-header-text h2">
-            Dərslər
-        </div>
-        <div class="component-crud-button " (click)="crudPopupVisible = true">
-            <i class="fa-solid fa-square-plus"></i>
-            Əlavə et
-        </div>
+  <div class="component-header">
+    <div class="component-header-text h2">
+      Dərslər
     </div>
-    <div class="component-body">
-        <table class="component-table">
-            <tr>
-              <th>Dərsin kodu</th>
-              <th>Dərsin adı</th>
-              <th>Sinifi</th>
-              <th>Dərsi verən müəllimin adı</th>
-              <th>Dərsi verən müəllimin soyadı</th>
-            </tr>
-            <tr>
-              <td>Jill</td>
-              <td>Jill</td>
-              <td>Jill</td>
-              <td>Jill</td>
-              <td>Jill</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Eve</td>
-              <td>Eve</td>
-              <td>Eve</td>
-              <td>Eve</td>
-
-            </tr>
-            <tr>
-              <td>Adam</td>
-              <td>Eve</td>
-              <td>Eve</td>
-              <td>Eve</td>
-              <td>Eve</td>
-
-            </tr>
-          </table>
+    <div class="component-crud-button " (click)="crudPopupVisible = true">
+      <i class="fa-solid fa-square-plus"></i>
+      Əlavə et
     </div>
+  </div>
+  <div class="component-body">
+    <table class="component-table">
+      <tr>
+        <th>Dərsin kodu</th>
+        <th>Dərsin adı</th>
+        <th>Sinifi</th>
+        <th>Dərsi verən müəllimin adı</th>
+        <th>Dərsi verən müəllimin soyadı</th>
+      </tr>
+      <tr>
+        <td>Jill</td>
+        <td>Jill</td>
+        <td>Jill</td>
+        <td>Jill</td>
+        <td>Jill</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>Eve</td>
+        <td>Eve</td>
+        <td>Eve</td>
+        <td>Eve</td>
+
+      </tr>
+      <tr>
+        <td>Adam</td>
+        <td>Eve</td>
+        <td>Eve</td>
+        <td>Eve</td>
+        <td>Eve</td>
+
+      </tr>
+    </table>
+  </div>
 </div>
 
 <div *ngIf="crudPopupVisible" class="component-crud-popup">
-    <div class="component-crud-popup-main">
-      <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-        <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
-          <i class="fa-solid fa-x"></i>
-        </button>
-      </div>
+  <div class="component-crud-popup-main">
 
-      <div class="component-crud-popup-body">
-        <form action="">
-          <input type="text" placeholder="Dərsin adı">
-          <input type="text" placeholder="Dərsin adı">
-          <input type="text" placeholder="Dərsin adı">
-          <input type="text" placeholder="Dərsin adı">
-        </form>
-      </div>
-    </div>    
+    <div class="component-crud-popup-header w-100 d-flex justify-content-end">
+      <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </div>
+
+    <div class="component-crud-popup-body gap-2">
+      <form action="">
+        <div class="d-flex flex-wrap justify-content-between">
+          <div class="form-input-label col-4">
+            <input class="formInput" type="text" placeholder="Dərsin adı" #txtdersad>
+          </div>
+          <div class="form-input-label col-4">
+            <input class="formInput" type="text" placeholder="Dərsin kodu" #txtderskod>
+          </div>
+          <div class="form-input-label col-4">
+            <input class="formInput" type="text" placeholder="Sinifi" #textsinif>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="text" placeholder="Dərsi verən müəllimin adı " #txtmuellimad>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="text" placeholder="Dərsi verən müəllimin soyadı" #txtmuellimsoyad>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
+      <button class="crud-popup-save-button" (click)="create(txtmuellimsoyad,txtmuellimad,textsinif,txtderskod,txtdersad)">
+        <i class="fa-solid fa-check"></i>
+        Yadda saxla
+      </button>
+    </div>
+  </div>
 </div>

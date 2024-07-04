@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from '../../services/common/http-client.service';
+import { DersService } from '../../services/model/ders/ders.service';
+import { Ders } from '../../models/ders';
 
 @Component({
   selector: 'app-ders',
@@ -8,7 +10,7 @@ import { HttpClientService } from '../../services/common/http-client.service';
 })
 export class DersComponent implements OnInit { 
   
-  constructor(private httpClient : HttpClientService) {
+  constructor(private dersService : DersService) {
 
   }
 
@@ -16,6 +18,22 @@ export class DersComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  create(muellimsoyad : HTMLInputElement,muellimad: HTMLInputElement,
+    sinif: HTMLInputElement,derskod: HTMLInputElement,dersad: HTMLInputElement){
+
+      const ders = new Ders();
+
+      // ders.dersAd = dersad.value,
+      // ders.dersKod = derskod.value,
+      // ders.sinif = sinif.value,
+      // ders.muellimSoyad = muellimsoyad.value,
+      // ders.muellimAd = muellimad.value,
+
+
+      this.dersService.create(ders)
+
   }
 
 }
