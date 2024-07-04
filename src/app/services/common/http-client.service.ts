@@ -1,19 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpClientService {
 
   constructor(private httpClient : HttpClient, @Inject("baseUrl") private baseUrl: string ) { }
   
-  get<T>(parameters : Partial<RequestParams>){
+  private url(parameters: Partial<RequestParams>){
+    return `${parameters.baseUrl ? parameters.baseUrl : this.baseUrl}/${parameters.controller}/${parameters.action ? parameters.action : "" }`
+  }
+
+  get<T>(parameters : Partial<RequestParams>, id? : string) : Observable<T>{
 
     let url : string = "";
 
-    url = `${this.baseUrl}/${parameters.controller}/${parameters.action}`;
-
+    if(parameters.fullEndpoint)
+      url = parameters.fullEndpoint
+    else
+      url = `${this.url(parameters)}${id ? `/${id}` : ""}`;
+    
+    return this.httpClient.get<T>(url , {headers : parameters.headers } )
   } 
 
   post(){
