@@ -14,26 +14,59 @@ export class DersComponent implements OnInit {
 
   }
 
+  public mainData : Ders[];
+
   public crudPopupVisible : boolean = false;
 
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll(){
+
+    this.dersService.getAll().subscribe(rs => {
+
+      console.log(rs);
+      
+      this.mainData = rs;
+
+    });
+
     
   }
 
   create(muellimsoyad : HTMLInputElement,muellimad: HTMLInputElement,
     sinif: HTMLInputElement,derskod: HTMLInputElement,dersad: HTMLInputElement){
 
+      console.log("ComponentLvl Create works");
+
       const ders = new Ders();
 
       ders.name = dersad.value,
       ders.code = derskod.value,
-      ders.class = sinif.value,
-      ders.TeacherSurname = muellimsoyad.value,
-      ders.TeacherName = muellimad.value,
+      ders.class = parseInt(sinif.value),
+      ders.teacherSurname = muellimsoyad.value,
+      ders.teacherName = muellimad.value,
 
 
-      this.dersService.create(ders)
+      this.dersService.create(ders).subscribe(response => {
 
+        if(response === 201)
+          
+          this.getAll();
+        
+
+      });
+
+      this.crudPopupVisible = false;
+  }
+
+  deleteItem(id : string){
+    this.dersService.deleteItem(id);
+
+    setTimeout(() => {
+      this.getAll();
+    }, 300);
   }
 
 }

@@ -11,8 +11,8 @@
   <div class="component-body">
     <table class="component-table">
       <thead>
-
         <tr>
+          <th></th>
           <th>Dərsin kodu</th>
           <th>Dərsin adı</th>
           <th>Sinifi</th>
@@ -22,29 +22,19 @@
       </thead>
       <tbody>
 
-        <tr>
-          <td>Jill</td>
-          <td>Jill</td>
-          <td>Jill</td>
-          <td>Jill</td>
-          <td>Jill</td>
+        <tr *ngFor="let item of mainData">
+          <td>
+            <button class="component-table-trash" (click)="deleteItem(item.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>{{item.code}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.class}}</td>
+          <td>{{item.teacherName}}</td>
+          <td>{{item.teacherSurname}}</td>
         </tr>
-        <tr>
-          <td>Eve</td>
-          <td>Eve</td>
-          <td>Eve</td>
-          <td>Eve</td>
-          <td>Eve</td>
-
-        </tr>
-        <tr>
-          <td>Adam</td>
-          <td>Eve</td>
-          <td>Eve</td>
-          <td>Eve</td>
-          <td>Eve</td>
-
-        </tr>
+        
       </tbody>
     </table>
   </div>
@@ -69,7 +59,7 @@
             <input class="formInput" type="text" placeholder="Dərsin kodu" #txtderskod>
           </div>
           <div class="form-input-label col-4">
-            <input class="formInput" type="text" placeholder="Sinifi" #textsinif>
+            <input class="formInput" type="number" placeholder="Sinifi" #textsinif>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="text" placeholder="Dərsi verən müəllimin adı " #txtmuellimad>

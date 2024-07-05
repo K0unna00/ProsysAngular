@@ -6,14 +6,14 @@
 
     .component-header{
         display: flex;
-        justify-content: space-between;
-        
+        justify-content: space-between;   
     }
 
     *{
         margin: 0;
         padding: 0;
     }
+    
     .component-crud-button {
         appearance: none;
         background-color: #2ea44f;
@@ -89,12 +89,11 @@
                 font-size: 16px;
                 transition: 0.3s;
             }
-            tr:not(:first-child){
+            tbody tr{
                 background-color: #abe9b8;
                 transition: 0.1s;
                 &:nth-child(even){
                     background-color: #9bd3a7;
-
                 }
                 &:hover{
                     background-color: #76ca8a;
@@ -166,4 +165,10 @@
   .formInput{
     width: 100%;
   }
+}
+
+.component-table-trash{
+  background-color: transparent;
+  border: none;
+  color: rgb(196, 33, 33);
 }
