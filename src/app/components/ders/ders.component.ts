@@ -25,11 +25,11 @@ export class DersComponent implements OnInit {
 
       const ders = new Ders();
 
-      // ders.dersAd = dersad.value,
-      // ders.dersKod = derskod.value,
-      // ders.sinif = sinif.value,
-      // ders.muellimSoyad = muellimsoyad.value,
-      // ders.muellimAd = muellimad.value,
+      ders.name = dersad.value,
+      ders.code = derskod.value,
+      ders.class = sinif.value,
+      ders.TeacherSurname = muellimsoyad.value,
+      ders.TeacherName = muellimad.value,
 
 
       this.dersService.create(ders)

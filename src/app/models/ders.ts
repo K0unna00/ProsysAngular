@@ -1,8 +1,9 @@
 export class Ders {
-    // dersAd : string;
-    // dersKod : string;
-    // sinif : string;
-    // muellimAd : string;
-    // muellimSoyad : string;
+    id: string;
+    code : string;
+    name : string;
+    class : string;
+    TeacherName : string;
+    TeacherSurname : string;
 
 }

@@ -13,7 +13,7 @@ export class DersService {
 
   create(ders : Ders){
     this.httpClietService.post<Ders>({
-      controller : "derss"
+      controller : "Lessons",
     },ders).subscribe(result => {
 
       
