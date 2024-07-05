@@ -1,65 +1,93 @@
-.main-sidebar{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 50px;
-    padding: 2rem;
-    border-right: 1px solid gray;
+.main-sidebar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  padding: 2rem;
+  border-right: 1px solid gray;
+  background-color: rgb(241, 241, 241);
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.main-sidebar button{
-    border: none;
-    background-color: transparent;
+.main-sidebar button {
+  border: none;
+  background-color: transparent;
 }
 
 .main-sidebar button a {
-    width: 100%;
-  align-items: center;
   appearance: none;
-  background-color: #3EB2FD;
-  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
-  background-size: calc(100% + 20px) calc(100% + 20px);
-  border-radius: 100px;
-  border-width: 0;
-  box-shadow: none;
+  background-color: #372a4b;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #fff;
   cursor: pointer;
-  display: inline-flex;
-  font-family: CircularStd,sans-serif;
-  font-size: 1rem;
-  height: auto;
-  justify-content: center;
-  line-height: 1.5;
-  padding: 6px 20px;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 12px 24px;
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: background-color .2s,background-position .2s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  vertical-align: top;
+  vertical-align: middle;
   white-space: nowrap;
-  a{
-        text-decoration: none;
-        color: white;
-      }
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  //   font-size: 2px;
 }
 
-.main-sidebar button a:active,
-.main-sidebar button a:focus {
+.main-sidebar button a:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
   outline: none;
 }
 
 .main-sidebar button a:hover {
-  background-position: -20px -20px;
+  background-color: #302442;
 }
 
-.main-sidebar button a:focus:not(:active) {
-  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+.main-sidebar button a:focus {
+  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+  outline: none;
 }
 
+.main-sidebar button a:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
 
+.main-sidebar button a:active {
+  background-color: #302442;
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
+// .prosysLogo{
+//   // position: absolute;
+//   top: 25px;
+//   left: 25px;
+//   font-size: 42px;
+//   flex: 2;
+// }
+// .navigation{
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: 100%;
+//   flex: 10;
+// }

@@ -1,9 +1,9 @@
 <div class="component-main">
   <div class="component-header">
-    <div class="component-header-text h2">
+    <div class="component-header-text">
       Dərslər
     </div>
-    <div class="component-crud-button " (click)="crudPopupVisible = true">
+    <div class="component-crud-button" (click)="crudPopupVisible = true">
       <i class="fa-solid fa-square-plus"></i>
       Əlavə et
     </div>
@@ -34,6 +34,45 @@
           <td>{{item.teacherName}}</td>
           <td>{{item.teacherSurname}}</td>
         </tr>
+
+        <tr >
+          <td>
+            <button class="component-table-trash" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>Salam</td>
+          <td>Sagol</td>
+          <td>Salam</td>
+          <td>Salam</td>
+          <td>Salam</td>
+        </tr>
+
+        <tr >
+          <td>
+            <button class="component-table-trash" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>Salam</td>
+          <td>Sagol</td>
+          <td>Salam</td>
+          <td>Salam</td>
+          <td>Salam</td>
+        </tr>
+
+        <tr >
+          <td>
+            <button class="component-table-trash" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>Salam</td>
+          <td>Sagol</td>
+          <td>Salam</td>
+          <td>Salam</td>
+          <td>Salam</td>
+        </tr>
         
       </tbody>
     </table>
@@ -52,19 +91,19 @@
     <div class="component-crud-popup-body gap-2">
       <form action="">
         <div class="d-flex flex-wrap justify-content-between">
-          <div class="form-input-label col-4">
+          <div class="form-input-label col-6">
             <input class="formInput" type="text" placeholder="Dərsin adı" #txtdersad>
           </div>
-          <div class="form-input-label col-4">
+          <div class="form-input-label col-6">
             <input class="formInput" type="text" placeholder="Dərsin kodu" #txtderskod>
           </div>
-          <div class="form-input-label col-4">
+          <div class="form-input-label col-6">
             <input class="formInput" type="number" placeholder="Sinifi" #textsinif>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="text" placeholder="Dərsi verən müəllimin adı " #txtmuellimad>
           </div>
-          <div class="form-input-label col-6">
+          <div class="form-input-label col-12">
             <input class="formInput" type="text" placeholder="Dərsi verən müəllimin soyadı" #txtmuellimsoyad>
           </div>
         </div>
