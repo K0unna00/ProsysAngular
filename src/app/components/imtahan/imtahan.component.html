@@ -93,7 +93,11 @@
         <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
           <div class="d-flex flex-wrap justify-content-between">
             <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu" >
+              <select class="formInput" formControlName="derskod">
+                <option [ngValue]="null">Dərs kod</option>
+                <option *ngFor="let item of dersKodData;" [ngValue]="item">{{item.name}}</option>
+              </select>
+
               <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
                 {{derskod.errors | json}}
               </div>

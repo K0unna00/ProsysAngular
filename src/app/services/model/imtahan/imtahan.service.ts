@@ -6,7 +6,7 @@ import { Imtahan } from '../../../models/imtahan';
 @Injectable({
   providedIn: 'root'
 })
-export class imtahanService {
+export class ImtahanService {
 
   constructor(private httpClietService: HttpClientService) { }
 
