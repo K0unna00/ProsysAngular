@@ -49,15 +49,13 @@ export class HttpClientService {
     return this.httpClient.post<number>(url, body, { headers: parameters.headers });
   }
 
-  put() {}
-
-  delete<T>(parameters: Partial<RequestParams>, id : Partial<string>) : Observable<boolean>{
+  delete<T>(parameters: Partial<RequestParams>, parameter : any) : Observable<boolean>{
     let url: string = "";
 
     if (parameters.fullEndpoint)
       url = parameters.fullEndpoint
     else
-      url = `${this.url(parameters)}${id}`;
+      url = `${this.url(parameters)}${parameter}`;
 
       return this.httpClient.delete<boolean>(url,{headers: parameters.headers})
   }

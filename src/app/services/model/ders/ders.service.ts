@@ -24,10 +24,10 @@ export class DersService {
     });
   }
 
-  deleteItem(id: string) : Observable<boolean>{
+  deleteItem(code: string) : Observable<boolean>{
     return this.httpClietService.delete({
       controller: this.contollerName
-    }, id);
+    }, code);
   }
 
 }

@@ -10,9 +10,10 @@ export class ImtahanService {
 
   constructor(private httpClietService: HttpClientService) { }
 
-  contollerName: string = "Lessons";
+  contollerName: string = "Exams";
 
   create(imtahan: Imtahan): Observable<number> {
+    console.log(imtahan);
     return this.httpClietService.post<Imtahan>({
       controller: this.contollerName,
     }, imtahan)

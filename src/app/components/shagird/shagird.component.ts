@@ -102,8 +102,8 @@ export class ShagirdComponent implements OnInit {
 
   }
 
-  deleteItem(id: string) {
-    this.shagirdService.deleteItem(id).subscribe({
+  deleteItem(number: number) {
+    this.shagirdService.deleteItem(number).subscribe({
       next: result =>{
         console.log(result);
 

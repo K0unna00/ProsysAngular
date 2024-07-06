@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Imtahan } from '../../models/imtahan';
 import { Ders } from '../../models/ders';
 import { DersService } from '../../services/model/ders/ders.service';
+import { Shagird } from '../../models/shagird';
+import { ShagirdService } from '../../services/model/shagird/shagird.service';
 
 @Component({
   selector: 'app-imtahan',
@@ -12,9 +14,9 @@ import { DersService } from '../../services/model/ders/ders.service';
 })
 export class ImtahanComponent implements OnInit {
   frm: FormGroup;
-  constructor(private dersService : DersService,private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
+  constructor(private shagirdService : ShagirdService ,private dersService : DersService,private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
     this.frm = formBuilder.group({
-      derskod: ["", [Validators.required, Validators.maxLength(3)]],
+      derskod: ["", Validators.required],
       shagirdnomresi: ["", [Validators.required, Validators.maxLength(5)]],
       tarix: ["", Validators.required],
       qiymet: ["", [Validators.required, Validators.maxLength(1)]]
@@ -24,7 +26,6 @@ export class ImtahanComponent implements OnInit {
 
 
   //#region FormItems
-
 
   get derskod() {
     return this.frm.get('derskod')
@@ -49,6 +50,8 @@ export class ImtahanComponent implements OnInit {
   public mainData: Imtahan[];
 
   public dersKodData: Ders[];
+  
+  public shagirdNomreData: Shagird[];
 
   public crudPopupVisible: boolean = false;
 
@@ -61,6 +64,8 @@ export class ImtahanComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.getDersKod();
+    this.getShagirdNomre();
   }
 
   CrudPopupVisibleChange(val: boolean): void {
@@ -79,6 +84,12 @@ export class ImtahanComponent implements OnInit {
   getDersKod(){
     this.dersService.getAll().subscribe(rs => {
       this.dersKodData = rs;
+    });
+  }
+
+  getShagirdNomre(){
+    this.shagirdService.getAll().subscribe(rs => {
+      this.shagirdNomreData = rs;
     });
   }
 

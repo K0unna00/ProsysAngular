@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DersService } from '../../services/model/ders/ders.service';
 import { Ders } from '../../models/ders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { response } from 'express';
 
 @Component({
   selector: 'app-ders',
@@ -23,9 +22,7 @@ export class DersComponent implements OnInit {
     });
   }
 
-
   //#region FormItems
-
 
   get dersad() {
     return this.frm.get('dersad')
@@ -54,78 +51,69 @@ export class DersComponent implements OnInit {
 
   public crudPopupVisible: boolean = false;
 
-  listCount : number = 0;
+  listCount: number = 0;
 
   //#endregion
-  
+
+  //#region EventHandlers
 
   ngOnInit(): void {
     this.getAll();
   }
 
-  CrudPopupVisibleChange(val : boolean): void{
-
+  CrudPopupVisibleChange(val: boolean): void {
     this.frm.reset();
-
     this.crudPopupVisible = val;
   }
 
   getAll() {
-
     this.dersService.getAll().subscribe(rs => {
       this.mainData = rs;
     });
-
-
   }
 
-  create() {      
-    if(this.frm.valid){
+  create() {
+    if (this.frm.valid) {
       const ders = new Ders();
-      
+
       ders.name = this.dersad.value,
-      ders.code = this.derskod.value,
-      ders.class = parseInt(this.sinif.value),
-      ders.teacherSurname = this.muellimsoyad.value,
-      ders.teacherName = this.muellimad.value,
+        ders.code = this.derskod.value,
+        ders.class = parseInt(this.sinif.value),
+        ders.teacherSurname = this.muellimsoyad.value,
+        ders.teacherName = this.muellimad.value,
 
-      this.dersService.create(ders).subscribe({
-        next: data =>{
-          console.log(data);
+        this.dersService.create(ders).subscribe({
+          next: data => {
+            console.log(data);
 
-          this.getAll();
+            this.getAll();
 
-          this.frm.reset();
+            this.frm.reset();
 
-          this.crudPopupVisible = false;
-        },
-        error(err) {
+            this.crudPopupVisible = false;
+          },
+          error(err) {
 
-          // this.frm.reset();
+            // this.frm.reset();
 
-          console.log(err);
-          alert("Error!! Status code: " + err.status)
-        },
-      });;
-      
-      
-
+            console.log(err);
+            alert("Error!! Status code: " + err.status)
+          },
+        });;
     }
-
   }
 
-  deleteItem(id: string) {
-    this.dersService.deleteItem(id).subscribe({
-      next: result =>{
+  deleteItem(code: string) {
+    this.dersService.deleteItem(code).subscribe({
+      next: result => {
         console.log(result);
-
         this.getAll();
       },
       error(err) {
-        console.log(err); 
+        console.log(err);
       },
-
     });
   }
 
+  //#endregion
 }

@@ -10,7 +10,7 @@ export class ShagirdService {
 
   constructor(private httpClietService: HttpClientService) { }
 
-  contollerName: string = "Lessons";
+  contollerName: string = "Students";
 
   create(shagird: Shagird): Observable<number> {
     return this.httpClietService.post<Shagird>({
@@ -24,10 +24,10 @@ export class ShagirdService {
     });
   }
 
-  deleteItem(id: string) : Observable<boolean>{
+  deleteItem(number: number) : Observable<boolean>{
     return this.httpClietService.delete({
       controller: this.contollerName
-    }, id);
+    }, number);
   }
 
 }

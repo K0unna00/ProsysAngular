@@ -1,133 +1,97 @@
 <div class="component-main">
-    <div class="component-header">
-      <div class="component-header-text">
-        İmtahanlar
-      </div>
-      <div class="component-crud-button" (click)="CrudPopupVisibleChange(true)">
-        <i class="fa-solid fa-square-plus"></i>
-        Əlavə et
-      </div>
+  <div class="component-header">
+    <div class="component-header-text">
+      İmtahanlar
     </div>
-    <div class="component-body">
-      <table class="component-table">
-        <thead>
-          <tr>
-            <th>№</th>
-            <th></th>
-            <th>Dərs kodu</th>
-            <th>Tələbə nömrəsi</th>
-            <th>Qiymət</th>
-            <th>Tarix</th>
-          </tr>
-        </thead>
-        <tbody>
-  
-          <tr *ngFor="let item of mainData; let i = index">
-            <td>
-              {{ i + 1 }}
-            </td>
-            <td>
-              <button class="component-table-trash" (click)="deleteItem(item.id)">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-            <td>{{item.lessoncode}}</td>
-            <td>{{item.studentNumber}}</td>
-            <td>{{item.grade}}</td>
-            <td>{{item.date}}</td>
-          </tr>
-  
-          <!-- <tr >
-            <td>
-              <button class="component-table-trash" >
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-            <td>Salam</td>
-            <td>Sagol</td>
-            <td>Salam</td>
-            <td>Salam</td>
-            <td>Salam</td>
-          </tr>
-  
-          <tr >
-            <td>
-              <button class="component-table-trash" >
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-            <td>Salam</td>
-            <td>Sagol</td>
-            <td>Salam</td>
-            <td>Salam</td>
-            <td>Salam</td>
-          </tr>
-  
-          <tr >
-            <td>
-              <button class="component-table-trash" >
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-            <td>Salam</td>
-            <td>Sagol</td>
-            <td>Salam</td>
-            <td>Salam</td>
-            <td>Salam</td>
-          </tr> -->
-          
-        </tbody>
-      </table>
+    <div class="component-crud-button" (click)="CrudPopupVisibleChange(true)">
+      <i class="fa-solid fa-square-plus"></i>
+      Əlavə et
     </div>
   </div>
-  
-  <div *ngIf="crudPopupVisible" class="component-crud-popup">
-    <div class="component-crud-popup-main">
-      <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-        <button class="crud-popup-close-button" (click)="CrudPopupVisibleChange(false)">
-          <i class="fa-solid fa-x"></i>
-        </button>
-      </div>
-  
-      <div class="component-crud-popup-body gap-2">
-        <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
-          <div class="d-flex flex-wrap justify-content-between">
-            <div class="form-input-label col-6">
-              <select class="formInput" formControlName="derskod">
-                <option [ngValue]="null">Dərs kod</option>
-                <option *ngFor="let item of dersKodData;" [ngValue]="item">{{item.name}}</option>
-              </select>
+  <div class="component-body">
+    <table class="component-table">
+      <thead>
+        <tr>
+          <th>№</th>
+          <th></th>
+          <th>Dərs kodu</th>
+          <th>Tələbə nömrəsi</th>
+          <th>Qiymət</th>
+          <th>Tarix</th>
+        </tr>
+      </thead>
+      <tbody>
 
-              <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
-                {{derskod.errors | json}}
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="shagirdnomresi" placeholder="Şagird nömrəsi"  >
-              <div class="validation-error" *ngIf="!shagirdnomresi.valid && (shagirdnomresi.dirty || shagirdnomresi.touched)">
-                {{shagirdnomresi.errors | json}}
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="datetime" formControlName="tarix" placeholder="Tarix">
-              <div class="validation-error" *ngIf="!tarix.valid && (tarix.dirty || tarix.touched)">
-                {{tarix.errors | json}}
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="number" formControlName="qiymet" placeholder="Qiymət" >
-              <div class="validation-error" *ngIf="!qiymet.valid && (qiymet.dirty || qiymet.touched)">
-                {{qiymet.errors | json}}
-              </div>
+        <tr *ngFor="let item of mainData; let i = index">
+          <td>
+            {{ i + 1 }}
+          </td>
+          <td>
+            <button class="component-table-trash" (click)="deleteItem(item.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>{{item.lessoncode}}</td>
+          <td>{{item.studentNumber}}</td>
+          <td>{{item.grade}}</td>
+          <td>{{item.date}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="crudPopupVisible" class="component-crud-popup">
+  <div class="component-crud-popup-main">
+    <div class="component-crud-popup-header w-100 d-flex justify-content-end">
+      <button class="crud-popup-close-button" (click)="CrudPopupVisibleChange(false)">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </div>
+
+    <div class="component-crud-popup-body gap-2">
+      <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
+        <div class="d-flex flex-wrap justify-content-between">
+          <div class="form-input-label col-6">
+            <select class="formInput" formControlName="derskod">
+              <option [ngValue]="null">Dərs kod</option>
+              <option *ngFor="let item of dersKodData;" [ngValue]="item.id">{{item.name}}</option>
+            </select>
+
+            <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
+              {{derskod.errors | json}}
             </div>
           </div>
-        </form>
-      </div>
-      <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
-        <button form="ngForm" class="crud-popup-save-button">
-          <i class="fa-solid fa-check"></i>
-          Yadda saxla
-        </button>
-      </div>
+          <div class="form-input-label col-6">
+            <select class="formInput" formControlName="shagirdnomresi">
+              <option [ngValue]="null">Şagird nömrəsi</option>
+              <option *ngFor="let item of shagirdNomreData;" [ngValue]="item.number">{{item.number}}</option>
+            </select>
+            <div class="validation-error"
+              *ngIf="!shagirdnomresi.valid && (shagirdnomresi.dirty || shagirdnomresi.touched)">
+              {{shagirdnomresi.errors | json}}
+            </div>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="date" formControlName="tarix" placeholder="Tarix">
+            <div class="validation-error" *ngIf="!tarix.valid && (tarix.dirty || tarix.touched)">
+              {{tarix.errors | json}}
+            </div>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="number" formControlName="qiymet" placeholder="Qiymət">
+            <div class="validation-error" *ngIf="!qiymet.valid && (qiymet.dirty || qiymet.touched)">
+              {{qiymet.errors | json}}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
+      <button form="ngForm" class="crud-popup-save-button">
+        <i class="fa-solid fa-check"></i>
+        Yadda saxla
+      </button>
     </div>
   </div>
+</div>
