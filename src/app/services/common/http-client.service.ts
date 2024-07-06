@@ -38,7 +38,7 @@ export class HttpClientService {
     return this.httpClient.get<T>(url, { headers: parameters.headers })
   }
 
-  post<T>(parameters: Partial<RequestParams>, body: Partial<T>): Observable<number> {
+  post<T>(parameters: Partial<RequestParams>, body: Partial<T>): Observable<T> {
     let url: string = "";
 
     if (parameters.fullEndpoint)
@@ -46,7 +46,10 @@ export class HttpClientService {
     else
       url = `${this.url(parameters)}`;
 
-    return this.httpClient.post<number>(url, body, { headers: parameters.headers });
+      console.log(url);
+      
+
+    return this.httpClient.post<T>(url, body, { headers: parameters.headers });
   }
 
   put() {}

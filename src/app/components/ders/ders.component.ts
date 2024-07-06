@@ -81,6 +81,9 @@ export class DersComponent implements OnInit {
       ders.teacherSurname = this.muellimsoyad.value,
       ders.teacherName = this.muellimad.value,
       
+      console.log(ders);
+      
+
       this.dersService.create(ders);
       
       this.crudPopupVisible = false;
