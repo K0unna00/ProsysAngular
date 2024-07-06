@@ -3,7 +3,7 @@
       <div class="component-header-text">
         İmtahanlar
       </div>
-      <div class="component-crud-button" (click)="crudPopupVisible = true">
+      <div class="component-crud-button" (click)="CrudPopupVisibleChange(true)">
         <i class="fa-solid fa-square-plus"></i>
         Əlavə et
       </div>
@@ -83,9 +83,8 @@
   
   <div *ngIf="crudPopupVisible" class="component-crud-popup">
     <div class="component-crud-popup-main">
-  
       <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-        <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
+        <button class="crud-popup-close-button" (click)="CrudPopupVisibleChange(false)">
           <i class="fa-solid fa-x"></i>
         </button>
       </div>
@@ -94,33 +93,27 @@
         <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
           <div class="d-flex flex-wrap justify-content-between">
             <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="imtahanad" placeholder="Dərsin adı" >
-              <div class="validation-error" *ngIf="!imtahanad.valid && (imtahanad.dirty || imtahanad.touched)">
-                {{imtahanad.errors | json}}
+              <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu" >
+              <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
+                {{derskod.errors | json}}
               </div>
             </div>
             <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="imtahankod" placeholder="Dərsin kodu"  >
-              <div class="validation-error" *ngIf="!imtahankod.valid && (imtahankod.dirty || imtahankod.touched)">
-                {{imtahankod.errors | json}}
+              <input class="formInput" type="text" formControlName="shagirdnomresi" placeholder="Şagird nömrəsi"  >
+              <div class="validation-error" *ngIf="!shagirdnomresi.valid && (shagirdnomresi.dirty || shagirdnomresi.touched)">
+                {{shagirdnomresi.errors | json}}
               </div>
             </div>
             <div class="form-input-label col-6">
-              <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
-              <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
-                {{sinif.errors | json}}
+              <input class="formInput" type="datetime" formControlName="tarix" placeholder="Tarix">
+              <div class="validation-error" *ngIf="!tarix.valid && (tarix.dirty || tarix.touched)">
+                {{tarix.errors | json}}
               </div>
             </div>
             <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı" >
-              <div class="validation-error" *ngIf="!muellimad.valid && (muellimad.dirty || muellimad.touched)">
-                {{muellimad.errors | json}}
-              </div>
-            </div>
-            <div class="form-input-label col-12">
-              <input class="formInput" type="text" formControlName="muellimsoyad" placeholder="Dərsi verən müəllimin soyadı">
-              <div class="validation-error" *ngIf="!muellimsoyad.valid && (muellimsoyad.dirty || muellimsoyad.touched)">
-                {{muellimsoyad.errors | json}}
+              <input class="formInput" type="number" formControlName="qiymet" placeholder="Qiymət" >
+              <div class="validation-error" *ngIf="!qiymet.valid && (qiymet.dirty || qiymet.touched)">
+                {{qiymet.errors | json}}
               </div>
             </div>
           </div>

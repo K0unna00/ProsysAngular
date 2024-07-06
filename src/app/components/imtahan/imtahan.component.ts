@@ -12,11 +12,10 @@ export class ImtahanComponent implements OnInit {
   frm: FormGroup;
   constructor(private imtahanService: imtahanService, private formBuilder: FormBuilder) {
     this.frm = formBuilder.group({
-      // imtahanad: ["", [Validators.required, Validators.maxLength(30)]],
-      // imtahankod: ["", [Validators.required, Validators.maxLength(3)]],
-      // sinif: ["", [Validators.required, Validators.maxLength(2)]],
-      // muellimad: ["", [Validators.required, Validators.maxLength(20)]],
-      // muellimsoyad: ["", [Validators.required, Validators.maxLength(20)]],
+      derskod: ["", [Validators.required, Validators.maxLength(3)]],
+      shagirdnomresi: ["", [Validators.required, Validators.maxLength(5)]],
+      tarix: ["", Validators.required],
+      qiymet: ["", [Validators.required, Validators.maxLength(1)]]
 
     });
   }
@@ -25,24 +24,20 @@ export class ImtahanComponent implements OnInit {
   //#region FormItems
 
 
-  get imtahanad() {
-    return this.frm.get('imtahanad')
+  get derskod() {
+    return this.frm.get('derskod')
   }
 
-  get imtahankod() {
-    return this.frm.get('imtahankod')
+  get shagirdnomresi() {
+    return this.frm.get('shagirdnomresi')
   }
 
-  get sinif() {
-    return this.frm.get('sinif')
+  get tarix() {
+    return this.frm.get('tarix')
   }
 
-  get muellimad() {
-    return this.frm.get('muellimad')
-  }
-
-  get muellimsoyad() {
-    return this.frm.get('muellimsoyad')
+  get qiymet() {
+    return this.frm.get('qiymet')
   }
 
   //#endregion
@@ -52,67 +47,62 @@ export class ImtahanComponent implements OnInit {
 
   public crudPopupVisible: boolean = false;
 
-  listCount : number = 0;
+  listCount: number = 0;
 
   //#endregion
-  
+
+  //#region EventHandlers
 
   ngOnInit(): void {
     this.getAll();
   }
 
-  getAll() {
+  CrudPopupVisibleChange(val: boolean): void {
 
+    this.frm.reset();
+
+    this.crudPopupVisible = val;
+  }
+
+  getAll() {
     this.imtahanService.getAll().subscribe(rs => {
       this.mainData = rs;
     });
-
-
   }
 
-  create() {      
-    if(this.frm.valid){
+  create() {
+    if (this.frm.valid) {
       const imtahan = new Imtahan();
-      
-      // imtahan.name = this.imtahanad.value,
-      // imtahan.code = this.imtahankod.value,
-      // imtahan.class = parseInt(this.sinif.value),
-      // imtahan.teacherSurname = this.muellimsoyad.value,
-      // imtahan.teacherName = this.muellimad.value,
-      
-      console.log(imtahan);
-      
+
+      imtahan.studentNumber = this.shagirdnomresi.value,
+      imtahan.date = this.tarix.value,
+      imtahan.grade = parseInt(this.qiymet.value),
+      imtahan.lessoncode = this.derskod.value
 
       this.imtahanService.create(imtahan).subscribe({
-        next: data =>{
+        next: data => {
           console.log(data);
-
           this.getAll();
         },
         error(err) {
           console.log(err);
-          
         },
       });;
-      
       this.crudPopupVisible = false;
-
     }
-
   }
 
   deleteItem(id: string) {
     this.imtahanService.deleteItem(id).subscribe({
-      next: result =>{
+      next: result => {
         console.log(result);
-
         this.getAll();
       },
       error(err) {
-        console.log(err); 
+        console.log(err);
       },
-
     });
   }
 
+  //#endregion
 }
