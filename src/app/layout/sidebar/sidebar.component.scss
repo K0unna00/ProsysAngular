@@ -49,6 +49,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  transition: 0.2s;
   //   font-size: 2px;
 }
 
@@ -59,6 +60,7 @@
 
 .main-sidebar button a:hover {
   background-color: #302442;
+  // transform: translate(1.1);
 }
 
 .main-sidebar button a:focus {

@@ -13,6 +13,7 @@
       <thead>
         <tr>
           <th></th>
+          <th></th>
           <th>Dərsin kodu</th>
           <th>Dərsin adı</th>
           <th>Sinifi</th>
@@ -22,7 +23,10 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let item of mainData">
+        <tr *ngFor="let item of mainData; let i = index">
+          <td>
+            {{ i + 1 }}
+          </td>
           <td>
             <button class="component-table-trash" (click)="deleteItem(item.id)">
               <i class="fa-solid fa-trash"></i>
@@ -35,7 +39,7 @@
           <td>{{item.teacherSurname}}</td>
         </tr>
 
-        <tr >
+        <!-- <tr >
           <td>
             <button class="component-table-trash" >
               <i class="fa-solid fa-trash"></i>
@@ -72,7 +76,7 @@
           <td>Salam</td>
           <td>Salam</td>
           <td>Salam</td>
-        </tr>
+        </tr> -->
         
       </tbody>
     </table>
@@ -89,29 +93,43 @@
     </div>
 
     <div class="component-crud-popup-body gap-2">
-      <form action="">
+      <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" placeholder="Dərsin adı" #txtdersad>
+            <input class="formInput" type="text" formControlName="dersad" placeholder="Dərsin adı" >
+            <div class="validation-error" *ngIf="!dersad.valid && (dersad.dirty || dersad.touched)">
+              {{dersad.errors | json}}
+            </div>
           </div>
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" placeholder="Dərsin kodu" #txtderskod>
+            <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu"  >
+            <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
+              {{derskod.errors | json}}
+            </div>
           </div>
           <div class="form-input-label col-6">
-            <input class="formInput" type="number" placeholder="Sinifi" #textsinif>
+            <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
+            <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
+              {{sinif.errors | json}}
+            </div>
           </div>
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" placeholder="Dərsi verən müəllimin adı " #txtmuellimad>
+            <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı" >
+            <div class="validation-error" *ngIf="!muellimad.valid && (muellimad.dirty || muellimad.touched)">
+              {{muellimad.errors | json}}
+            </div>
           </div>
           <div class="form-input-label col-12">
-            <input class="formInput" type="text" placeholder="Dərsi verən müəllimin soyadı" #txtmuellimsoyad>
+            <input class="formInput" type="text" formControlName="muellimsoyad" placeholder="Dərsi verən müəllimin soyadı">
+            <div class="validation-error" *ngIf="!muellimsoyad.valid && (muellimsoyad.dirty || muellimsoyad.touched)">
+              {{muellimsoyad.errors | json}}
+            </div>
           </div>
         </div>
       </form>
     </div>
     <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
-      <button class="crud-popup-save-button"
-        (click)="create(txtmuellimsoyad,txtmuellimad,textsinif,txtderskod,txtdersad)">
+      <button form="ngForm" class="crud-popup-save-button">
         <i class="fa-solid fa-check"></i>
         Yadda saxla
       </button>

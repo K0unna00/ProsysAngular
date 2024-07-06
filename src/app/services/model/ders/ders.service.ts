@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from '../../common/http-client.service';
 import { Ders } from '../../../models/ders';
 import { Observable } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,13 @@ export class DersService {
 
   contollerName : string = "Lessons";
 
-  create(ders: Ders) : Observable<number> {
-    try {
-
-
-      var obj =  this.httpClietService.post<Ders>({
+  create(ders: Ders){
+     this.httpClietService.post({
         controller: this.contollerName,
-      }, ders)
+      }, ders);
 
-      console.log(obj);
-      
-      return obj;
-
-    }
-    catch (ex) {
-
-      console.log(ex);
-
-      return new Observable<0>
-
-    }
+      return
+    
   }
 
   getAll(): Observable<Ders[]> {
