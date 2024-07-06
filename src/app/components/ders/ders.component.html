@@ -3,7 +3,7 @@
     <div class="component-header-text">
       Dərslər
     </div>
-    <div class="component-crud-button" (click)="crudPopupVisible = true">
+    <div class="component-crud-button" (click)="CrudPopupVisibleChange(true)">
       <i class="fa-solid fa-square-plus"></i>
       Əlavə et
     </div>
@@ -87,7 +87,7 @@
   <div class="component-crud-popup-main">
 
     <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-      <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
+      <button class="crud-popup-close-button" (click)="CrudPopupVisibleChange(false)">
         <i class="fa-solid fa-x"></i>
       </button>
     </div>

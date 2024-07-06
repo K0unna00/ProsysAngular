@@ -1,1 +1,136 @@
-<p>imtahan works!</p>
+<div class="component-main">
+    <div class="component-header">
+      <div class="component-header-text">
+        İmtahanlar
+      </div>
+      <div class="component-crud-button" (click)="crudPopupVisible = true">
+        <i class="fa-solid fa-square-plus"></i>
+        Əlavə et
+      </div>
+    </div>
+    <div class="component-body">
+      <table class="component-table">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th></th>
+            <th>Dərs kodu</th>
+            <th>Tələbə nömrəsi</th>
+            <th>Qiymət</th>
+            <th>Tarix</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let item of mainData; let i = index">
+            <td>
+              {{ i + 1 }}
+            </td>
+            <td>
+              <button class="component-table-trash" (click)="deleteItem(item.id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+            <td>{{item.lessoncode}}</td>
+            <td>{{item.studentNumber}}</td>
+            <td>{{item.grade}}</td>
+            <td>{{item.date}}</td>
+          </tr>
+  
+          <!-- <tr >
+            <td>
+              <button class="component-table-trash" >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+            <td>Salam</td>
+            <td>Sagol</td>
+            <td>Salam</td>
+            <td>Salam</td>
+            <td>Salam</td>
+          </tr>
+  
+          <tr >
+            <td>
+              <button class="component-table-trash" >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+            <td>Salam</td>
+            <td>Sagol</td>
+            <td>Salam</td>
+            <td>Salam</td>
+            <td>Salam</td>
+          </tr>
+  
+          <tr >
+            <td>
+              <button class="component-table-trash" >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+            <td>Salam</td>
+            <td>Sagol</td>
+            <td>Salam</td>
+            <td>Salam</td>
+            <td>Salam</td>
+          </tr> -->
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div *ngIf="crudPopupVisible" class="component-crud-popup">
+    <div class="component-crud-popup-main">
+  
+      <div class="component-crud-popup-header w-100 d-flex justify-content-end">
+        <button class="crud-popup-close-button" (click)="crudPopupVisible = false">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </div>
+  
+      <div class="component-crud-popup-body gap-2">
+        <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
+          <div class="d-flex flex-wrap justify-content-between">
+            <div class="form-input-label col-6">
+              <input class="formInput" type="text" formControlName="imtahanad" placeholder="Dərsin adı" >
+              <div class="validation-error" *ngIf="!imtahanad.valid && (imtahanad.dirty || imtahanad.touched)">
+                {{imtahanad.errors | json}}
+              </div>
+            </div>
+            <div class="form-input-label col-6">
+              <input class="formInput" type="text" formControlName="imtahankod" placeholder="Dərsin kodu"  >
+              <div class="validation-error" *ngIf="!imtahankod.valid && (imtahankod.dirty || imtahankod.touched)">
+                {{imtahankod.errors | json}}
+              </div>
+            </div>
+            <div class="form-input-label col-6">
+              <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
+              <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
+                {{sinif.errors | json}}
+              </div>
+            </div>
+            <div class="form-input-label col-6">
+              <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı" >
+              <div class="validation-error" *ngIf="!muellimad.valid && (muellimad.dirty || muellimad.touched)">
+                {{muellimad.errors | json}}
+              </div>
+            </div>
+            <div class="form-input-label col-12">
+              <input class="formInput" type="text" formControlName="muellimsoyad" placeholder="Dərsi verən müəllimin soyadı">
+              <div class="validation-error" *ngIf="!muellimsoyad.valid && (muellimsoyad.dirty || muellimsoyad.touched)">
+                {{muellimsoyad.errors | json}}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
+        <button form="ngForm" class="crud-popup-save-button">
+          <i class="fa-solid fa-check"></i>
+          Yadda saxla
+        </button>
+      </div>
+    </div>
+  </div>

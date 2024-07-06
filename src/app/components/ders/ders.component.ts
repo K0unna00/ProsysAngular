@@ -11,6 +11,7 @@ import { response } from 'express';
 })
 export class DersComponent implements OnInit {
   frm: FormGroup;
+
   constructor(private dersService: DersService, private formBuilder: FormBuilder) {
     this.frm = formBuilder.group({
       dersad: ["", [Validators.required, Validators.maxLength(30)]],
@@ -62,6 +63,13 @@ export class DersComponent implements OnInit {
     this.getAll();
   }
 
+  CrudPopupVisibleChange(val : boolean): void{
+
+    this.frm.reset();
+
+    this.crudPopupVisible = val;
+  }
+
   getAll() {
 
     this.dersService.getAll().subscribe(rs => {
@@ -80,23 +88,27 @@ export class DersComponent implements OnInit {
       ders.class = parseInt(this.sinif.value),
       ders.teacherSurname = this.muellimsoyad.value,
       ders.teacherName = this.muellimad.value,
-      
-      console.log(ders);
-      
 
       this.dersService.create(ders).subscribe({
         next: data =>{
           console.log(data);
 
           this.getAll();
+
+          this.frm.reset();
+
+          this.crudPopupVisible = false;
         },
         error(err) {
+
+          // this.frm.reset();
+
           console.log(err);
-          
+          alert("Error!! Status code: " + err.status)
         },
       });;
       
-      this.crudPopupVisible = false;
+      
 
     }
 
