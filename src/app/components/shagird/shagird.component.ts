@@ -15,14 +15,13 @@ export class ShagirdComponent implements OnInit {
     this.frm = formBuilder.group({
       ad: ["", [Validators.required, Validators.maxLength(30)]],
       soyad: ["", [Validators.required, Validators.maxLength(30)]],
-      sinif: ["", [Validators.required, Validators.maxLength(2)]],
-      nomre: ["", [Validators.required, Validators.maxLength(5)]],
+      sinif: ["", [Validators.required, Validators.max(99)]],
+      nomre: ["", [Validators.required, Validators.max(99999)]],
     });
   }
 
 
   //#region FormItems
-
 
   get ad() {
     return this.frm.get('ad')
@@ -43,6 +42,7 @@ export class ShagirdComponent implements OnInit {
   //#endregion
 
   //#region Data
+
   public mainData: Shagird[];
 
   public crudPopupVisible: boolean = false;
@@ -50,26 +50,20 @@ export class ShagirdComponent implements OnInit {
   listCount : number = 0;
 
   //#endregion
-  
 
   ngOnInit(): void {
     this.getAll();
   }
 
   CrudPopupVisibleChange(val : boolean): void{
-
     this.frm.reset();
-
     this.crudPopupVisible = val;
   }
 
   getAll() {
-
     this.shagirdService.getAll().subscribe(rs => {
       this.mainData = rs;
     });
-
-
   }
 
   create() {      
@@ -83,11 +77,8 @@ export class ShagirdComponent implements OnInit {
 
       this.shagirdService.create(shagird).subscribe({
         next: data =>{
-          
           this.getAll();
-
           this.frm.reset();
-
           this.crudPopupVisible = false;
         },
         error(err) {
@@ -95,18 +86,13 @@ export class ShagirdComponent implements OnInit {
           alert("Error!! Status code: " + err.status)
         },
       });;
-      
-      
-
     }
-
   }
 
   deleteItem(number: number) {
     this.shagirdService.deleteItem(number).subscribe({
       next: result =>{
         console.log(result);
-
         this.getAll();
       },
       error(err) {

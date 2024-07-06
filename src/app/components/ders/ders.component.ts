@@ -14,8 +14,8 @@ export class DersComponent implements OnInit {
   constructor(private dersService: DersService, private formBuilder: FormBuilder) {
     this.frm = formBuilder.group({
       dersad: ["", [Validators.required, Validators.maxLength(30)]],
-      derskod: ["", [Validators.required, Validators.maxLength(3)]],
-      sinif: ["", [Validators.required, Validators.maxLength(2)]],
+      derskod: ["", [Validators.required, Validators.max(999)]],
+      sinif: ["", [Validators.required, Validators.max(99)]],
       muellimad: ["", [Validators.required, Validators.maxLength(20)]],
       muellimsoyad: ["", [Validators.required, Validators.maxLength(20)]],
 

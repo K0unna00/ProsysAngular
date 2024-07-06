@@ -16,10 +16,10 @@ export class ImtahanComponent implements OnInit {
   frm: FormGroup;
   constructor(private shagirdService : ShagirdService ,private dersService : DersService,private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
     this.frm = formBuilder.group({
-      derskod: ["", Validators.required],
-      shagirdnomresi: ["", [Validators.required, Validators.maxLength(5)]],
+      dersid: ["", Validators.required],
+      shagirdid: ["", Validators.required ],
       tarix: ["", Validators.required],
-      qiymet: ["", [Validators.required, Validators.maxLength(1)]]
+      qiymet: ["", [Validators.required, Validators.max(9),Validators.min(0)]]
 
     });
   }
@@ -27,12 +27,12 @@ export class ImtahanComponent implements OnInit {
 
   //#region FormItems
 
-  get derskod() {
-    return this.frm.get('derskod')
+  get dersid() {
+    return this.frm.get('dersid')
   }
 
-  get shagirdnomresi() {
-    return this.frm.get('shagirdnomresi')
+  get shagirdid() {
+    return this.frm.get('shagirdid')
   }
 
   get tarix() {
@@ -76,8 +76,14 @@ export class ImtahanComponent implements OnInit {
   }
 
   getAll() {
-    this.imtahanService.getAll().subscribe(rs => {
-      this.mainData = rs;
+    this.imtahanService.getAll().subscribe({
+      next : rs => {
+        this.mainData = rs;
+      },
+      error(err) {
+        console.log(err);
+        
+      },
     });
   }
 
@@ -97,10 +103,10 @@ export class ImtahanComponent implements OnInit {
     if (this.frm.valid) {
       const imtahan = new Imtahan();
 
-      imtahan.studentNumber = this.shagirdnomresi.value,
+      imtahan.studentId = this.shagirdid.value,
       imtahan.date = this.tarix.value,
       imtahan.grade = parseInt(this.qiymet.value),
-      imtahan.lessoncode = this.derskod.value
+      imtahan.lessonId = this.dersid.value
 
       this.imtahanService.create(imtahan).subscribe({
         next: data => {

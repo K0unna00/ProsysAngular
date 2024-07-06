@@ -31,8 +31,8 @@
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
-          <td>{{item.lessoncode}}</td>
-          <td>{{item.studentNumber}}</td>
+          <td>{{item.lesson.code}}</td>
+          <td>{{item.student.number}}</td>
           <td>{{item.grade}}</td>
           <td>{{item.date}}</td>
         </tr>
@@ -53,23 +53,23 @@
       <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="form-input-label col-6">
-            <select class="formInput" formControlName="derskod">
+            <select class="formInput" formControlName="dersid">
               <option [ngValue]="null">Dərs kod</option>
               <option *ngFor="let item of dersKodData;" [ngValue]="item.id">{{item.name}}</option>
             </select>
 
-            <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
-              {{derskod.errors | json}}
+            <div class="validation-error" *ngIf="!dersid.valid && (dersid.dirty || dersid.touched)">
+              Dərs boş ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
-            <select class="formInput" formControlName="shagirdnomresi">
+            <select class="formInput" formControlName="shagirdid">
               <option [ngValue]="null">Şagird nömrəsi</option>
-              <option *ngFor="let item of shagirdNomreData;" [ngValue]="item.number">{{item.number}}</option>
+              <option *ngFor="let item of shagirdNomreData;" [ngValue]="item.id">{{item.number}}</option>
             </select>
             <div class="validation-error"
-              *ngIf="!shagirdnomresi.valid && (shagirdnomresi.dirty || shagirdnomresi.touched)">
-              {{shagirdnomresi.errors | json}}
+              *ngIf="!shagirdid.valid && (shagirdid.dirty || shagirdid.touched)">
+              {{shagirdid.errors | json}}
             </div>
           </div>
           <div class="form-input-label col-6">

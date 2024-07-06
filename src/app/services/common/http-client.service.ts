@@ -46,6 +46,9 @@ export class HttpClientService {
     else
       url = `${this.url(parameters)}`;
 
+      console.log(body);
+      
+
     return this.httpClient.post<number>(url, body, { headers: parameters.headers });
   }
 
