@@ -84,7 +84,17 @@ export class DersComponent implements OnInit {
       console.log(ders);
       
 
-      this.dersService.create(ders);
+      this.dersService.create(ders).subscribe({
+        next: data =>{
+          console.log(data);
+
+          this.getAll();
+        },
+        error(err) {
+          console.log(err);
+          
+        },
+      });;
       
       this.crudPopupVisible = false;
 
@@ -93,11 +103,17 @@ export class DersComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    this.dersService.deleteItem(id);
+    this.dersService.deleteItem(id).subscribe({
+      next: result =>{
+        console.log(result);
 
-    setTimeout(() => {
-      this.getAll();
-    }, 300);
+        this.getAll();
+      },
+      error(err) {
+        console.log(err); 
+      },
+
+    });
   }
 
 }
