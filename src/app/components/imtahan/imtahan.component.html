@@ -61,9 +61,8 @@
               <option [ngValue]="null">Dərs kod</option>
               <option *ngFor="let item of dersKodData;" [ngValue]="item.id">{{item.code}}</option>
             </select>
-
             <div class="validation-error" *ngIf="!dersid.valid && (dersid.dirty || dersid.touched)">
-              Dərs boş ola bilməz!
+              Dərs seçilməlidir!
             </div>
           </div>
           <div class="form-input-label col-6">
@@ -73,19 +72,19 @@
             </select>
             <div class="validation-error"
               *ngIf="!shagirdid.valid && (shagirdid.dirty || shagirdid.touched)">
-              {{shagirdid.errors | json}}
+              Şagird seçilməlidir!
             </div>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="date" formControlName="tarix" placeholder="Tarix">
             <div class="validation-error" *ngIf="!tarix.valid && (tarix.dirty || tarix.touched)">
-              {{tarix.errors | json}}
+              Tarix boş ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="number" formControlName="qiymet" placeholder="Qiymət">
             <div class="validation-error" *ngIf="!qiymet.valid && (qiymet.dirty || qiymet.touched)">
-              {{qiymet.errors | json}}
+              Qiymət boş və ya 10-dan çox ola bilməz!
             </div>
           </div>
         </div>

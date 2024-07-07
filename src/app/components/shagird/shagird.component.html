@@ -60,25 +60,25 @@
             <div class="form-input-label col-6">
               <input class="formInput" type="text" formControlName="ad" placeholder="Ad" >
               <div class="validation-error" *ngIf="!ad.valid && (ad.dirty || ad.touched)">
-                {{ad.errors | json}}
+                Ad boş və ya 30 elementdən uzun ola bilməz!
               </div>
             </div>
             <div class="form-input-label col-6">
               <input class="formInput" type="text" formControlName="soyad" placeholder="Soyad"  >
               <div class="validation-error" *ngIf="!soyad.valid && (soyad.dirty || soyad.touched)">
-                {{soyad.errors | json}}
+                Soyad boş və ya 30 elementdən uzun ola bilməz!
               </div>
             </div>
             <div class="form-input-label col-6">
               <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
               <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
-                {{sinif.errors | json}}
+                Sinif boş və ya 2 elementdən uzun ola bilməz!
               </div>
             </div>
             <div class="form-input-label col-6">
               <input class="formInput" type="number" formControlName="nomre" placeholder="Nömrə" >
               <div class="validation-error" *ngIf="!nomre.valid && (nomre.dirty || nomre.touched)">
-                {{nomre.errors | json}}
+                Nömrə boş və ya 5 elementdən uzun ola bilməz!
               </div>
             </div>
           </div>
