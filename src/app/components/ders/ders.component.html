@@ -62,31 +62,31 @@
           <div class="form-input-label col-6">
             <input class="formInput" type="text" formControlName="dersad" placeholder="Dərsin adı" >
             <div class="validation-error" *ngIf="!dersad.valid && (dersad.dirty || dersad.touched)">
-              {{dersad.errors | json}}
+              Ad boş və ya 30 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu"  >
             <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
-              {{derskod.errors | json}}
+              Dərs kodu boş və ya 3 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
             <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
-              {{sinif.errors | json}}
+              Sinif boş və ya 2 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
             <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı" >
             <div class="validation-error" *ngIf="!muellimad.valid && (muellimad.dirty || muellimad.touched)">
-              {{muellimad.errors | json}}
+              Müəllim adı boş və ya 20 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-12">
             <input class="formInput" type="text" formControlName="muellimsoyad" placeholder="Dərsi verən müəllimin soyadı">
             <div class="validation-error" *ngIf="!muellimsoyad.valid && (muellimsoyad.dirty || muellimsoyad.touched)">
-              {{muellimsoyad.errors | json}}
+              Müəllim soyadı boş və ya 20 elementdən uzun ola bilməz!
             </div>
           </div>
         </div>
