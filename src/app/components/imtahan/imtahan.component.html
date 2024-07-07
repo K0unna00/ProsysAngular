@@ -3,7 +3,7 @@
     <div class="component-header-text">
       İmtahanlar
     </div>
-    <div class="component-crud-button" (click)="CrudPopupVisibleChange(true)">
+    <div class="component-crud-button" (click)="CrudPopupOpen()">
       <i class="fa-solid fa-square-plus"></i>
       Əlavə et
     </div>
@@ -12,7 +12,7 @@
     <table class="component-table">
       <thead>
         <tr>
-          <th></th>
+          <th>Actions</th>
           <th>№</th>
           <th>Dərs kodu</th>
           <th>Tələbə nömrəsi</th>
@@ -24,8 +24,12 @@
 
         <tr *ngFor="let item of mainData; let i = index">
           <td>
-            <button class="component-table-trash" (click)="deleteItem(item.id)">
+            <button class="component-table-trash" (click)="DeleteItem(item.id)">
               <i class="fa-solid fa-trash"></i>
+            </button>
+
+            <button class="component-table-trash ms-4" (click)="UpdatePopupOpen(item)">
+              <i class="fa-solid fa-pencil"></i>
             </button>
           </td>
           <td>
@@ -34,7 +38,7 @@
           <td>{{item.lesson.code}}</td>
           <td>{{item.student.number}}</td>
           <td>{{item.grade}}</td>
-          <td>{{item.date}}</td>
+          <td>{{item.date | date:"dd.MM.yyyy"}}</td>
         </tr>
       </tbody>
     </table>
@@ -44,18 +48,18 @@
 <div *ngIf="crudPopupVisible" class="component-crud-popup">
   <div class="component-crud-popup-main">
     <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-      <button class="crud-popup-close-button" (click)="CrudPopupVisibleChange(false)">
+      <button class="crud-popup-close-button" (click)="CrudPopupClose()">
         <i class="fa-solid fa-x"></i>
       </button>
     </div>
 
     <div class="component-crud-popup-body gap-2">
-      <form [formGroup]="frm" (ngSubmit)="create()" id="ngForm">
+      <form [formGroup]="frm" (ngSubmit)="CreateUpdate()" id="ngForm">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="form-input-label col-6">
             <select class="formInput" formControlName="dersid">
               <option [ngValue]="null">Dərs kod</option>
-              <option *ngFor="let item of dersKodData;" [ngValue]="item.id">{{item.name}}</option>
+              <option *ngFor="let item of dersKodData;" [ngValue]="item.id">{{item.code}}</option>
             </select>
 
             <div class="validation-error" *ngIf="!dersid.valid && (dersid.dirty || dersid.touched)">
