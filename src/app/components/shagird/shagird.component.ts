@@ -11,13 +11,18 @@ import { Shagird } from '../../models/shagird';
 export class ShagirdComponent implements OnInit {
   frm: FormGroup;
 
-  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder) {
-    this.frm = formBuilder.group({
-      ad: ["", [Validators.required, Validators.maxLength(30)]],
-      soyad: ["", [Validators.required, Validators.maxLength(30)]],
-      sinif: ["", [Validators.required, Validators.max(99)]],
-      nomre: ["", [Validators.required, Validators.max(99999)]],
+  initializeForm(shagird: any = {}) {
+    this.frm = this.formBuilder.group({
+      ad: [shagird.name || "", [Validators.required, Validators.maxLength(30)]],
+      soyad: [shagird.surname || "", [Validators.required, Validators.maxLength(30)]],
+      sinif: [shagird.class || "", [Validators.required, Validators.max(99)]],
+      nomre: [shagird.number || "", [Validators.required, Validators.max(99999)]]
     });
+  }
+
+
+  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder) {
+    this.initializeForm();
   }
 
 
@@ -78,13 +83,7 @@ export class ShagirdComponent implements OnInit {
   }
 
   UpdatePopupOpen(shagird: Shagird) {
-    this.frm = this.formBuilder.group({
-      ad: [shagird.name],
-      soyad: [shagird.surname],
-      sinif: [shagird.class],
-      nomre: [shagird.number],
-      id: [shagird.id]
-    });
+    this.initializeForm(shagird);
 
     this.crudStatus = true;
 

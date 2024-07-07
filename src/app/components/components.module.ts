@@ -8,7 +8,7 @@ import { ImtahanModule } from './imtahan/imtahan.module';
 
 @NgModule({
   declarations: [
-    
+  
   ],
   imports: [
     CommonModule,

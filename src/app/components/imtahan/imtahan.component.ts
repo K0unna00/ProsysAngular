@@ -14,14 +14,18 @@ import { ShagirdService } from '../../services/model/shagird/shagird.service';
 })
 export class ImtahanComponent implements OnInit {
   frm: FormGroup;
-  constructor(private shagirdService: ShagirdService, private dersService: DersService, private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
-    this.frm = formBuilder.group({
-      dersid: ["", Validators.required],
-      shagirdid: ["", Validators.required],
-      tarix: ["", Validators.required],
-      qiymet: ["", [Validators.required, Validators.max(9), Validators.min(0)]]
 
+  initializeForm(imtahan: any = {} ,tarix: any = {}) {
+    this.frm = this.formBuilder.group({
+      dersid: [imtahan.lessonId || "", Validators.required],
+      shagirdid: [imtahan.studentId || "", Validators.required],
+      tarix: [tarix || "", Validators.required],
+      qiymet: [imtahan.grade || "", [Validators.required, Validators.max(9), Validators.min(0)]]
     });
+  }
+
+  constructor(private shagirdService: ShagirdService, private dersService: DersService, private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
+    this.initializeForm();
   }
 
 
@@ -75,15 +79,9 @@ export class ImtahanComponent implements OnInit {
 
   UpdatePopupOpen(imtahan: Imtahan) {
 
-    var date = new Date(imtahan.date);
+    const formattedDate = imtahan.date ? new Date(imtahan.date).toISOString().split('T')[0] : '';
 
-    this.frm = this.formBuilder.group({
-      dersid: [imtahan.lessonId],
-      shagirdid: [imtahan.studentId],
-      tarix: [date],
-      qiymet: [imtahan.grade],
-      id: [imtahan.id]
-    });
+    this.initializeForm(imtahan,formattedDate);
 
     this.crudStatus = true;
 
@@ -93,6 +91,8 @@ export class ImtahanComponent implements OnInit {
   CrudPopupOpen(): void {
     this.frm.reset();
     this.crudPopupVisible = true;
+
+    this.crudStatus = false;
   }
 
   CrudPopupClose(): void {

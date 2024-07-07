@@ -11,18 +11,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DersComponent implements OnInit {
   frm: FormGroup;
 
-  constructor(private dersService: DersService, private formBuilder: FormBuilder) {
-    this.frm = formBuilder.group({
-      dersad: ["", [Validators.required, Validators.maxLength(30)]],
-      derskod: ["", [Validators.required, Validators.max(999)]],
-      sinif: ["", [Validators.required, Validators.max(99)]],
-      muellimad: ["", [Validators.required, Validators.maxLength(20)]],
-      muellimsoyad: ["", [Validators.required, Validators.maxLength(20)]],
-
+  initializeForm(ders: any = {}) {
+    this.frm = this.formBuilder.group({
+      dersad: [ders.name || "", [Validators.required, Validators.maxLength(30)]],
+      derskod: [ders.code || "", [Validators.required, Validators.max(999)]],
+      sinif: [ders.class || "", [Validators.required, Validators.max(99)]],
+      muellimad: [ders.teacherName || "", [Validators.required, Validators.maxLength(20)]],
+      muellimsoyad: [ders.teacherSurname || "", [Validators.required, Validators.maxLength(20)]],
+      id: [ders.id || ""]
     });
   }
 
-  //#region FormItems
+  constructor(private dersService: DersService, private formBuilder: FormBuilder) {
+    this.initializeForm();
+  }
+
+  //#region FormItemsEvents
 
   get dersad() {
     return this.frm.get('dersad')
@@ -71,6 +75,7 @@ export class DersComponent implements OnInit {
   CrudPopupOpen(): void {
     this.frm.reset();
     this.crudPopupVisible = true;
+    this.crudStatus = false;
   }
 
   CrudPopupClose(): void {
@@ -79,14 +84,7 @@ export class DersComponent implements OnInit {
   }
 
   UpdatePopupOpen(ders: Ders) {
-    this.frm = this.formBuilder.group({
-      dersad: [ders.name],
-      derskod: [ders.code],
-      sinif: [ders.class],
-      muellimad: [ders.teacherName],
-      muellimsoyad: [ders.teacherSurname],
-      id: [ders.id]
-    });
+    this.initializeForm(ders);
 
     this.crudStatus = true;
 
@@ -119,6 +117,7 @@ export class DersComponent implements OnInit {
             this.frm.reset();
   
             this.crudPopupVisible = false;
+
           },
           error(err) {
             console.log(err);
@@ -134,6 +133,7 @@ export class DersComponent implements OnInit {
             this.frm.reset();
   
             this.crudPopupVisible = false;
+
           },
           error(err) {
             console.log(err);
