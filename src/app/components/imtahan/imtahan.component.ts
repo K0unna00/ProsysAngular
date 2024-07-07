@@ -77,8 +77,6 @@ export class ImtahanComponent implements OnInit {
 
     var date = new Date(imtahan.date);
 
-    console.log(date);
-
     this.frm = this.formBuilder.group({
       dersid: [imtahan.lessonId],
       shagirdid: [imtahan.studentId],
@@ -86,9 +84,6 @@ export class ImtahanComponent implements OnInit {
       qiymet: [imtahan.grade],
       id: [imtahan.id]
     });
-
-    
-    
 
     this.crudStatus = true;
 
