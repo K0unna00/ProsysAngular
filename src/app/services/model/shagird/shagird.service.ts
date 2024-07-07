@@ -12,7 +12,7 @@ export class ShagirdService {
 
   contollerName: string = "Students";
 
-  create(shagird: Shagird): Observable<number> {
+  create(shagird: Shagird): Observable<Shagird> {
     return this.httpClietService.post<Shagird>({
       controller: this.contollerName,
     }, shagird)
@@ -24,10 +24,16 @@ export class ShagirdService {
     });
   }
 
-  deleteItem(number: number) : Observable<boolean>{
+  deleteItem(id: string) : Observable<boolean>{
     return this.httpClietService.delete({
       controller: this.contollerName
-    }, number);
+    }, id);
+  }
+
+  update(shagird: Shagird) : Observable<Shagird>{
+    return this.httpClietService.put({
+      controller: this.contollerName
+    }, shagird)
   }
 
 }

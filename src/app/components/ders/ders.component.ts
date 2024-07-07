@@ -44,12 +44,19 @@ export class DersComponent implements OnInit {
     return this.frm.get('muellimsoyad')
   }
 
+  get id() {
+    return this.frm.get('id')
+  }
+
+
   //#endregion
 
   //#region Data
   public mainData: Ders[];
 
   public crudPopupVisible: boolean = false;
+
+  public crudStatus : boolean;
 
   listCount: number = 0;
 
@@ -61,9 +68,29 @@ export class DersComponent implements OnInit {
     this.getAll();
   }
 
-  CrudPopupVisibleChange(val: boolean): void {
+  CrudPopupOpen(): void {
     this.frm.reset();
-    this.crudPopupVisible = val;
+    this.crudPopupVisible = true;
+  }
+
+  CrudPopupClose(): void {
+    this.frm.reset();
+    this.crudPopupVisible = false;
+  }
+
+  UpdatePopupOpen(ders: Ders) {
+    this.frm = this.formBuilder.group({
+      dersad: [ders.name],
+      derskod: [ders.code],
+      sinif: [ders.class],
+      muellimad: [ders.teacherName],
+      muellimsoyad: [ders.teacherSurname],
+      id: [ders.id]
+    });
+
+    this.crudStatus = true;
+
+    this.crudPopupVisible = true;
   }
 
   getAll() {
@@ -72,39 +99,57 @@ export class DersComponent implements OnInit {
     });
   }
 
-  create() {
+  CreateUpdate() {
     if (this.frm.valid) {
       const ders = new Ders();
 
-      ders.name = this.dersad.value,
-        ders.code = this.derskod.value,
-        ders.class = parseInt(this.sinif.value),
-        ders.teacherSurname = this.muellimsoyad.value,
-        ders.teacherName = this.muellimad.value,
+      ders.name = this.dersad.value;
+      ders.code = this.derskod.value;
+      ders.class = parseInt(this.sinif.value);
+      ders.teacherSurname = this.muellimsoyad.value;
+      ders.teacherName = this.muellimad.value;
 
-        this.dersService.create(ders).subscribe({
+      if(this.crudStatus){
+        ders.id = this.id.value;
+
+        this.dersService.update(ders).subscribe({
           next: data => {
-            console.log(data);
-
             this.getAll();
-
+  
             this.frm.reset();
-
+  
             this.crudPopupVisible = false;
           },
           error(err) {
-
-            // this.frm.reset();
-
             console.log(err);
             alert("Error!! Status code: " + err.status)
           },
         });;
+      }
+      else{
+        this.dersService.create(ders).subscribe({
+          next: data => {
+            this.getAll();
+  
+            this.frm.reset();
+  
+            this.crudPopupVisible = false;
+          },
+          error(err) {
+            console.log(err);
+            alert("Error!! Status code: " + err.status)
+          },
+        });;
+      }
+
+     
+
+      
     }
   }
 
-  deleteItem(code: string) {
-    this.dersService.deleteItem(code).subscribe({
+  DeleteItem(id: string) {
+    this.dersService.deleteItem(id).subscribe({
       next: result => {
         console.log(result);
         this.getAll();

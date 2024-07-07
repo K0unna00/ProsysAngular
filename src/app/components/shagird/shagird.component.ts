@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShagirdService} from '../../services/model/shagird/shagird.service';
+import { ShagirdService } from '../../services/model/shagird/shagird.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Shagird } from '../../models/shagird';
 
@@ -39,6 +39,10 @@ export class ShagirdComponent implements OnInit {
     return this.frm.get('nomre')
   }
 
+  get id() {
+    return this.frm.get('id')
+  }
+
   //#endregion
 
   //#region Data
@@ -47,17 +51,44 @@ export class ShagirdComponent implements OnInit {
 
   public crudPopupVisible: boolean = false;
 
-  listCount : number = 0;
+  /**
+   * insertMode = false;
+   * updateMode = true;
+   */
+  crudStatus: boolean;
+
+  listCount: number = 0;
 
   //#endregion
 
+  //#region EventHandlers
   ngOnInit(): void {
     this.getAll();
   }
 
-  CrudPopupVisibleChange(val : boolean): void{
+  CrudPopupOpen(): void {
     this.frm.reset();
-    this.crudPopupVisible = val;
+    this.crudPopupVisible = true;
+    this.crudStatus = false;
+  }
+
+  CrudPopupClose(): void {
+    this.frm.reset();
+    this.crudPopupVisible = false;
+  }
+
+  UpdatePopupOpen(shagird: Shagird) {
+    this.frm = this.formBuilder.group({
+      ad: [shagird.name],
+      soyad: [shagird.surname],
+      sinif: [shagird.class],
+      nomre: [shagird.number],
+      id: [shagird.id]
+    });
+
+    this.crudStatus = true;
+
+    this.crudPopupVisible = true;
   }
 
   getAll() {
@@ -66,40 +97,75 @@ export class ShagirdComponent implements OnInit {
     });
   }
 
-  create() {      
-    if(this.frm.valid){
+  CreateUpdate() {
+    if (this.frm.valid) {
+
+      
       const shagird = new Shagird();
       
-      shagird.name = this.ad.value,
-      shagird.surname = this.soyad.value,
-      shagird.class = this.sinif.value
-      shagird.number = this.nomre.value
+      shagird.name = this.ad.value;
+      shagird.surname = this.soyad.value;
+      shagird.class = this.sinif.value;
+      shagird.number = this.nomre.value;
 
-      this.shagirdService.create(shagird).subscribe({
-        next: data =>{
-          this.getAll();
-          this.frm.reset();
-          this.crudPopupVisible = false;
-        },
-        error(err) {
-          console.log(err);
-          alert("Error!! Status code: " + err.status)
-        },
-      });;
+      if (this.crudStatus) {
+
+        shagird.id = this.id.value;
+
+        this.shagirdService.update(shagird).subscribe({
+          next: data => {
+            this.getAll();
+            this.frm.reset();
+            this.crudPopupVisible = false;
+          },
+          error(err) {
+            console.log(err);
+            alert("Error!! Status code: " + err.status)
+          },
+        });
+        
+      }
+      else {
+        this.shagirdService.create(shagird).subscribe({
+          next: data => {
+            this.getAll();
+            this.frm.reset();
+            this.crudPopupVisible = false;
+          },
+          error(err) {
+            console.log(err);
+            alert("Error!! Status code: " + err.status)
+          },
+        });
+      }
+
+      
     }
   }
 
-  deleteItem(number: number) {
-    this.shagirdService.deleteItem(number).subscribe({
-      next: result =>{
+  DeleteItem(id: string) {
+    this.shagirdService.deleteItem(id).subscribe({
+      next: result => {
         console.log(result);
         this.getAll();
       },
       error(err) {
-        console.log(err); 
+        console.log(err);
       },
-
     });
   }
+
+  updateItem(shagird: Shagird) {
+    this.shagirdService.update(shagird).subscribe({
+      next: result => {
+        console.log(result);
+        this.getAll();
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
+  }
+  //#endregion
 
 }

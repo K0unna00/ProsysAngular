@@ -12,8 +12,8 @@
     <table class="component-table">
       <thead>
         <tr>
-          <th>№</th>
           <th></th>
+          <th>№</th>
           <th>Dərs kodu</th>
           <th>Tələbə nömrəsi</th>
           <th>Qiymət</th>
@@ -24,12 +24,12 @@
 
         <tr *ngFor="let item of mainData; let i = index">
           <td>
-            {{ i + 1 }}
-          </td>
-          <td>
             <button class="component-table-trash" (click)="deleteItem(item.id)">
               <i class="fa-solid fa-trash"></i>
             </button>
+          </td>
+          <td>
+            {{ i + 1 }}
           </td>
           <td>{{item.lesson.code}}</td>
           <td>{{item.student.number}}</td>

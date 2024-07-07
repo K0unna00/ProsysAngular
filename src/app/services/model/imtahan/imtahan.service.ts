@@ -12,7 +12,7 @@ export class ImtahanService {
 
   contollerName: string = "Exams";
 
-  create(imtahan: Imtahan): Observable<number> {
+  create(imtahan: Imtahan): Observable<Imtahan> {
     console.log(imtahan);
     return this.httpClietService.post<Imtahan>({
       controller: this.contollerName,
@@ -29,6 +29,12 @@ export class ImtahanService {
     return this.httpClietService.delete({
       controller: this.contollerName
     }, id);
+  }
+
+  update(imtahan: Imtahan) : Observable<Imtahan>{
+    return this.httpClietService.put({
+      controller: this.contollerName
+    }, imtahan)
   }
 
 }

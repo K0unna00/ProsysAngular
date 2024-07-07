@@ -12,7 +12,7 @@ export class DersService {
 
   contollerName: string = "Lessons";
 
-  create(ders: Ders): Observable<number> {
+  create(ders: Ders): Observable<Ders> {
     return this.httpClietService.post<Ders>({
       controller: this.contollerName,
     }, ders)
@@ -24,10 +24,16 @@ export class DersService {
     });
   }
 
-  deleteItem(code: string) : Observable<boolean>{
+  update(imtahan: Ders) : Observable<Ders>{
+    return this.httpClietService.put({
+      controller: this.contollerName
+    }, imtahan)
+  }
+
+  deleteItem(id: string) : Observable<boolean>{
     return this.httpClietService.delete({
       controller: this.contollerName
-    }, code);
+    }, id);
   }
 
 }
