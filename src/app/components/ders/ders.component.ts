@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DersService } from '../../services/model/ders/ders.service';
 import { Ders } from '../../models/ders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from '../../services/common/toast.service';
 
 @Component({
   selector: 'app-ders',
@@ -22,8 +23,17 @@ export class DersComponent implements OnInit {
     });
   }
 
-  constructor(private dersService: DersService, private formBuilder: FormBuilder) {
+  constructor(private dersService: DersService, private formBuilder: FormBuilder,private toastService: ToastService) {
     this.initializeForm();
+  }
+
+
+  showSuccessToast() {
+    this.toastService.showToast(true, 'Əməliyyat uğurla başa çattı');
+  }
+
+  showFailedToast() {
+    this.toastService.showToast(false, 'Əməliyyat uğursuz oldu');
   }
 
   //#region FormItemsEvents
@@ -100,7 +110,6 @@ export class DersComponent implements OnInit {
   CreateUpdate() {
     if (this.frm.valid) {
       const ders = new Ders();
-
       ders.name = this.dersad.value;
       ders.code = this.derskod.value;
       ders.class = parseInt(this.sinif.value);
@@ -113,15 +122,13 @@ export class DersComponent implements OnInit {
         this.dersService.update(ders).subscribe({
           next: data => {
             this.getAll();
-  
             this.frm.reset();
-  
             this.crudPopupVisible = false;
-
+            this.showSuccessToast();
           },
           error(err) {
             console.log(err);
-            alert("Error!! Status code: " + err.status)
+            this.showFailedToast();
           },
         });;
       }
@@ -129,22 +136,16 @@ export class DersComponent implements OnInit {
         this.dersService.create(ders).subscribe({
           next: data => {
             this.getAll();
-  
             this.frm.reset();
-  
             this.crudPopupVisible = false;
-
+            this.showSuccessToast();
           },
           error(err) {
             console.log(err);
-            alert("Error!! Status code: " + err.status)
+            this.showFailedToast();
           },
         });;
       }
-
-     
-
-      
     }
   }
 
@@ -153,9 +154,11 @@ export class DersComponent implements OnInit {
       next: result => {
         console.log(result);
         this.getAll();
+        this.showSuccessToast();
       },
       error(err) {
         console.log(err);
+        this.showFailedToast();
       },
     });
   }

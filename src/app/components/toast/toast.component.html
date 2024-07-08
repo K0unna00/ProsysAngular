@@ -1,0 +1,8 @@
+<div *ngIf="toastVisible" @slideInOut class="toast-popup">
+    <div *ngIf="toastSuccess" class="toast-success">
+      {{ message }}
+    </div>
+    <div *ngIf="!toastSuccess" class="toast-failed">
+      {{ message }}
+    </div>
+  </div>

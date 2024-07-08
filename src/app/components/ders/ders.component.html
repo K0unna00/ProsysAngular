@@ -60,13 +60,13 @@
       <form [formGroup]="frm" (ngSubmit)="CreateUpdate()" id="ngForm">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" formControlName="dersad" placeholder="Dərsin adı" >
+            <input class="formInput" type="text" formControlName="dersad" placeholder="Dərsin adı">
             <div class="validation-error" *ngIf="!dersad.valid && (dersad.dirty || dersad.touched)">
               Ad boş və ya 30 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu"  >
+            <input class="formInput" type="text" formControlName="derskod" placeholder="Dərsin kodu">
             <div class="validation-error" *ngIf="!derskod.valid && (derskod.dirty || derskod.touched)">
               Dərs kodu boş və ya 3 elementdən uzun ola bilməz!
             </div>
@@ -78,13 +78,14 @@
             </div>
           </div>
           <div class="form-input-label col-6">
-            <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı" >
+            <input class="formInput" type="text" formControlName="muellimad" placeholder="Dərsi verən müəllimin adı">
             <div class="validation-error" *ngIf="!muellimad.valid && (muellimad.dirty || muellimad.touched)">
               Müəllim adı boş və ya 20 elementdən uzun ola bilməz!
             </div>
           </div>
           <div class="form-input-label col-12">
-            <input class="formInput" type="text" formControlName="muellimsoyad" placeholder="Dərsi verən müəllimin soyadı">
+            <input class="formInput" type="text" formControlName="muellimsoyad"
+              placeholder="Dərsi verən müəllimin soyadı">
             <div class="validation-error" *ngIf="!muellimsoyad.valid && (muellimsoyad.dirty || muellimsoyad.touched)">
               Müəllim soyadı boş və ya 20 elementdən uzun ola bilməz!
             </div>
@@ -100,3 +101,6 @@
     </div>
   </div>
 </div>
+
+
+
