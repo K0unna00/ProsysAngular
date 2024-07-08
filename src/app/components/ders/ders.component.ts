@@ -3,6 +3,7 @@ import { DersService } from '../../services/model/ders/ders.service';
 import { Ders } from '../../models/ders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from '../../services/common/toast.service';
+import { SpinnerService } from '../../services/common/spinner.service';
 
 @Component({
   selector: 'app-ders',
@@ -23,7 +24,8 @@ export class DersComponent implements OnInit {
     });
   }
 
-  constructor(private dersService: DersService, private formBuilder: FormBuilder,private toastService: ToastService) {
+  constructor(private dersService: DersService, private formBuilder: FormBuilder,
+    private toastService: ToastService, private spinnerService : SpinnerService) {
     this.initializeForm();
   }
 
@@ -94,8 +96,11 @@ export class DersComponent implements OnInit {
   }
 
   getAll() {
+    this.spinnerService.showSpinner(true);
+
     this.dersService.getAll().subscribe(rs => {
       this.mainData = rs;
+      this.spinnerService.showSpinner(false);
     });
   }
 
@@ -108,21 +113,24 @@ export class DersComponent implements OnInit {
       ders.teacherSurname = this.muellimsoyad.value;
       ders.teacherName = this.muellimad.value;
 
+      this.spinnerService.showSpinner(true);
+
       if(this.crudStatus){
         ders.id = this.id.value;
-
         this.dersService.update(ders).subscribe({
           next: data => {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
+          error: error => {
+            console.log(error);
+            this.spinnerService.showSpinner(false);
             this.toastService.showToast(false);
           },
-        });;
+        });
       }
       else{
         this.dersService.create(ders).subscribe({
@@ -131,26 +139,33 @@ export class DersComponent implements OnInit {
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
+          error: error => {
+            console.log(error);
             this.toastService.showToast(false);
+            this.spinnerService.showSpinner(false);
           },
-        });;
+        });
       }
     }
   }
 
   DeleteItem(id: string) {
+
+    this.spinnerService.showSpinner(true);
+
     this.dersService.deleteItem(id).subscribe({
       next: result => {
         console.log(result);
         this.getAll();
         this.toastService.showToast(true);
+        this.spinnerService.showSpinner(false);
       },
-      error(err) {
-        console.log(err);
+      error: error => {
+        console.log(error);
         this.toastService.showToast(false);
+        this.spinnerService.showSpinner(false);
       },
     });
   }

@@ -7,6 +7,7 @@ import { DersService } from '../../services/model/ders/ders.service';
 import { Shagird } from '../../models/shagird';
 import { ShagirdService } from '../../services/model/shagird/shagird.service';
 import { ToastService } from '../../services/common/toast.service';
+import { SpinnerService } from '../../services/common/spinner.service';
 
 @Component({
   selector: 'app-imtahan',
@@ -28,7 +29,7 @@ export class ImtahanComponent implements OnInit {
 
   constructor(private shagirdService: ShagirdService, private dersService: DersService,
      private imtahanService: ImtahanService, private formBuilder: FormBuilder,
-     private toastService: ToastService) {
+     private toastService: ToastService,private spinnerService : SpinnerService) {
     this.initializeForm();
   }
 
@@ -105,26 +106,34 @@ export class ImtahanComponent implements OnInit {
   }
 
   getAll() {
+
+    this.spinnerService.showSpinner(true);
+
     this.imtahanService.getAll().subscribe({
       next: rs => {
         this.mainData = rs;
+        this.spinnerService.showSpinner(false);
       },
       error(err) {
         console.log(err);
-
+        this.spinnerService.showSpinner(false);
       },
     });
   }
 
   getDersKod() {
+    this.spinnerService.showSpinner(true);
     this.dersService.getAll().subscribe(rs => {
       this.dersKodData = rs;
+      this.spinnerService.showSpinner(false);
     });
   }
 
   getShagirdNomre() {
+    this.spinnerService.showSpinner(true);
     this.shagirdService.getAll().subscribe(rs => {
       this.shagirdNomreData = rs;
+      this.spinnerService.showSpinner(false);
     });
   }
 
@@ -137,6 +146,8 @@ export class ImtahanComponent implements OnInit {
       imtahan.grade = parseInt(this.qiymet.value);
       imtahan.lessonId = this.dersid.value;
 
+      this.spinnerService.showSpinner(true);
+
       if (this.crudStatus) {
 
         imtahan.id = this.id.value;
@@ -144,17 +155,16 @@ export class ImtahanComponent implements OnInit {
         this.imtahanService.update(imtahan).subscribe({
           next: data => {
             this.getAll();
-
             this.frm.reset();
-
             this.crudPopupVisible = false;
-
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
+          error: error => {
+            console.log(error);
 
             this.toastService.showToast(false);
+            this.spinnerService.showSpinner(false);
           },
         });
 
@@ -163,17 +173,15 @@ export class ImtahanComponent implements OnInit {
         this.imtahanService.create(imtahan).subscribe({
           next: data => {
             this.getAll();
-
             this.frm.reset();
-
             this.crudPopupVisible = false;
-
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
-
+          error: error => {
+            console.log(error);
             this.toastService.showToast(false);
+            this.spinnerService.showSpinner(false);
           },
         });
 
@@ -183,17 +191,19 @@ export class ImtahanComponent implements OnInit {
   }
 
   DeleteItem(id: string) {
+    this.spinnerService.showSpinner(true);
+
     this.imtahanService.deleteItem(id).subscribe({
       next: result => {
         console.log(result);
         this.getAll();
-
         this.toastService.showToast(true);
+        this.spinnerService.showSpinner(false);
       },
-      error(err) {
-        console.log(err);
-
+      error: error => {
+        console.log(error);
         this.toastService.showToast(false);
+        this.spinnerService.showSpinner(false);
       },
     });
   }

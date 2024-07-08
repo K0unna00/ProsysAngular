@@ -4,19 +4,22 @@ import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { SpinnerComponent } from './spinner/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports: [
-    LayoutComponent
+    LayoutComponent,
+    SpinnerComponent
   ]
 })
 export class LayoutModule { }

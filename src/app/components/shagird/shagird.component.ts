@@ -3,6 +3,7 @@ import { ShagirdService } from '../../services/model/shagird/shagird.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Shagird } from '../../models/shagird';
 import { ToastService } from '../../services/common/toast.service';
+import { SpinnerService } from '../../services/common/spinner.service';
 
 @Component({
   selector: 'app-shagird',
@@ -23,7 +24,8 @@ export class ShagirdComponent implements OnInit {
   }
 
 
-  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder, private toastService: ToastService) {
+  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder, 
+    private toastService: ToastService, private spinnerService: SpinnerService) {
     this.initializeForm();
   }
 
@@ -109,6 +111,8 @@ export class ShagirdComponent implements OnInit {
       shagird.class = this.sinif.value;
       shagird.number = this.nomre.value;
 
+      this.spinnerService.showSpinner(true);
+
       if (this.crudStatus) {
 
         shagird.id = this.id.value;
@@ -118,13 +122,13 @@ export class ShagirdComponent implements OnInit {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
-
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
-
+          error: error => {
+            console.log(error);
             this.toastService.showToast(false);
+            this.spinnerService.showSpinner(false);
           },
         });
         
@@ -136,11 +140,12 @@ export class ShagirdComponent implements OnInit {
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
+            this.spinnerService.showSpinner(false);
           },
-          error(err) {
-            console.log(err);
-
+          error: error => {
+            console.log(error);
             this.toastService.showToast(false);
+            this.spinnerService.showSpinner(false);
           },
         });
       }
@@ -150,15 +155,20 @@ export class ShagirdComponent implements OnInit {
   }
 
   DeleteItem(id: string) {
+
+    this.spinnerService.showSpinner(true);
+
     this.shagirdService.deleteItem(id).subscribe({
       next: result => {
         console.log(result);
         this.getAll();
         this.toastService.showToast(true);
+        this.spinnerService.showSpinner(false);
       },
-      error(err) {
-        console.log(err);
+      error: error => {
+        console.log(error);
         this.toastService.showToast(false);
+        this.spinnerService.showSpinner(false);
       },
     });
   }

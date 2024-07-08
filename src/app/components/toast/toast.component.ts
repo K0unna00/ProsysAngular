@@ -7,13 +7,13 @@ import { ToastService } from '../../services/common/toast.service';
   styleUrl: './toast.component.scss',
   animations: [
     trigger('slideInOut', [
-      state('void', style({ transform: 'translateX(100%)' })),
-      state('*', style({ transform: 'translateX(0)' })),
+      state('void', style({ transform: 'translateY(-100%)' })),
+      state('*', style({ transform: 'translateY(0)' })),
       transition(':enter', [
         animate('300ms ease-out')
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({ transform: 'translateX(100%)' }))
+        animate('300ms ease-in', style({ transform: 'translateY(-100%)' }))
       ])
     ])
   ]
