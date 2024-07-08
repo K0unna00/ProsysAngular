@@ -21,7 +21,8 @@ export class ImtahanComponent implements OnInit {
       dersid: [imtahan.lessonId || "", Validators.required],
       shagirdid: [imtahan.studentId || "", Validators.required],
       tarix: [tarix || "", Validators.required],
-      qiymet: [imtahan.grade || "", [Validators.required, Validators.max(9), Validators.min(0)]]
+      qiymet: [imtahan.grade || "", [Validators.required, Validators.max(9), Validators.min(0)]],
+      id:[imtahan.id || ""]
     });
   }
 

@@ -17,7 +17,8 @@ export class ShagirdComponent implements OnInit {
       ad: [shagird.name || "", [Validators.required, Validators.maxLength(30)]],
       soyad: [shagird.surname || "", [Validators.required, Validators.maxLength(30)]],
       sinif: [shagird.class || "", [Validators.required, Validators.max(99)]],
-      nomre: [shagird.number || "", [Validators.required, Validators.max(99999)]]
+      nomre: [shagird.number || "", [Validators.required, Validators.max(99999)]],
+      id : [shagird.id || ""]
     });
   }
 
