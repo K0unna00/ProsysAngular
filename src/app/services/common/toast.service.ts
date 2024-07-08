@@ -5,11 +5,11 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
-  private toastSubject = new Subject<{ visible: boolean, success: boolean, message: string }>();
+  private toastSubject = new Subject<{ visible: boolean, success: boolean}>();
   toastState$ = this.toastSubject.asObservable();
 
-  showToast(success: boolean, message: string) {
-    this.toastSubject.next({ visible: true, success, message });
-    setTimeout(() => this.toastSubject.next({ visible: false, success, message }), 3000); 
+  showToast(success: boolean) {
+    this.toastSubject.next({ visible: true, success });
+    setTimeout(() => this.toastSubject.next({ visible: false, success }), 3000); 
   }
 }

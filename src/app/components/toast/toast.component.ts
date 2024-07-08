@@ -22,7 +22,6 @@ export class ToastComponent implements OnInit{
 
   toastVisible: boolean = false;
   toastSuccess: boolean = true;
-  message: string = '';
 
   constructor(private toastService: ToastService) {}
 
@@ -30,7 +29,6 @@ export class ToastComponent implements OnInit{
     this.toastService.toastState$.subscribe((toastState) => {
       this.toastVisible = toastState.visible;
       this.toastSuccess = toastState.success;
-      this.message = toastState.message;
     });
   }
 

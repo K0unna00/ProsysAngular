@@ -6,6 +6,7 @@ import { Ders } from '../../models/ders';
 import { DersService } from '../../services/model/ders/ders.service';
 import { Shagird } from '../../models/shagird';
 import { ShagirdService } from '../../services/model/shagird/shagird.service';
+import { ToastService } from '../../services/common/toast.service';
 
 @Component({
   selector: 'app-imtahan',
@@ -24,7 +25,9 @@ export class ImtahanComponent implements OnInit {
     });
   }
 
-  constructor(private shagirdService: ShagirdService, private dersService: DersService, private imtahanService: ImtahanService, private formBuilder: FormBuilder) {
+  constructor(private shagirdService: ShagirdService, private dersService: DersService,
+     private imtahanService: ImtahanService, private formBuilder: FormBuilder,
+     private toastService: ToastService) {
     this.initializeForm();
   }
 
@@ -144,9 +147,13 @@ export class ImtahanComponent implements OnInit {
             this.frm.reset();
 
             this.crudPopupVisible = false;
+
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
+
+            this.toastService.showToast(false);
           },
         });
 
@@ -159,9 +166,13 @@ export class ImtahanComponent implements OnInit {
             this.frm.reset();
 
             this.crudPopupVisible = false;
+
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
+
+            this.toastService.showToast(false);
           },
         });
 
@@ -175,9 +186,13 @@ export class ImtahanComponent implements OnInit {
       next: result => {
         console.log(result);
         this.getAll();
+
+        this.toastService.showToast(true);
       },
       error(err) {
         console.log(err);
+
+        this.toastService.showToast(false);
       },
     });
   }

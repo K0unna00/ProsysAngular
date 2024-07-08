@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShagirdService } from '../../services/model/shagird/shagird.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Shagird } from '../../models/shagird';
+import { ToastService } from '../../services/common/toast.service';
 
 @Component({
   selector: 'app-shagird',
@@ -21,7 +22,7 @@ export class ShagirdComponent implements OnInit {
   }
 
 
-  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder) {
+  constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder, private toastService: ToastService) {
     this.initializeForm();
   }
 
@@ -116,10 +117,13 @@ export class ShagirdComponent implements OnInit {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
+
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
-            alert("Error!! Status code: " + err.status)
+
+            this.toastService.showToast(false);
           },
         });
         
@@ -130,10 +134,12 @@ export class ShagirdComponent implements OnInit {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
-            alert("Error!! Status code: " + err.status)
+
+            this.toastService.showToast(false);
           },
         });
       }
@@ -147,21 +153,11 @@ export class ShagirdComponent implements OnInit {
       next: result => {
         console.log(result);
         this.getAll();
+        this.toastService.showToast(true);
       },
       error(err) {
         console.log(err);
-      },
-    });
-  }
-
-  updateItem(shagird: Shagird) {
-    this.shagirdService.update(shagird).subscribe({
-      next: result => {
-        console.log(result);
-        this.getAll();
-      },
-      error(err) {
-        console.log(err);
+        this.toastService.showToast(false);
       },
     });
   }

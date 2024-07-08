@@ -28,14 +28,6 @@ export class DersComponent implements OnInit {
   }
 
 
-  showSuccessToast() {
-    this.toastService.showToast(true, 'Əməliyyat uğurla başa çattı');
-  }
-
-  showFailedToast() {
-    this.toastService.showToast(false, 'Əməliyyat uğursuz oldu');
-  }
-
   //#region FormItemsEvents
 
   get dersad() {
@@ -124,11 +116,11 @@ export class DersComponent implements OnInit {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
-            this.showSuccessToast();
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
-            this.showFailedToast();
+            this.toastService.showToast(false);
           },
         });;
       }
@@ -138,11 +130,11 @@ export class DersComponent implements OnInit {
             this.getAll();
             this.frm.reset();
             this.crudPopupVisible = false;
-            this.showSuccessToast();
+            this.toastService.showToast(true);
           },
           error(err) {
             console.log(err);
-            this.showFailedToast();
+            this.toastService.showToast(false);
           },
         });;
       }
@@ -154,11 +146,11 @@ export class DersComponent implements OnInit {
       next: result => {
         console.log(result);
         this.getAll();
-        this.showSuccessToast();
+        this.toastService.showToast(true);
       },
       error(err) {
         console.log(err);
-        this.showFailedToast();
+        this.toastService.showToast(false);
       },
     });
   }
