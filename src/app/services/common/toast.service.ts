@@ -10,6 +10,6 @@ export class ToastService {
 
   showToast(success: boolean) {
     this.toastSubject.next({ visible: true, success });
-    setTimeout(() => this.toastSubject.next({ visible: false, success }), 3000); 
+    setTimeout(() => this.toastSubject.next({ visible: false, success }), 1700); 
   }
 }
