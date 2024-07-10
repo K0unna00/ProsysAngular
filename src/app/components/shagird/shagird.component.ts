@@ -23,12 +23,10 @@ export class ShagirdComponent implements OnInit {
     });
   }
 
-
   constructor(private shagirdService: ShagirdService, private formBuilder: FormBuilder, 
     private toastService: ToastService, private spinnerService: SpinnerService) {
     this.initializeForm();
   }
-
 
   //#region FormItems
 
@@ -68,10 +66,20 @@ export class ShagirdComponent implements OnInit {
 
   listCount: number = 0;
 
+  dataCount: Array<number> = new Array(6);
+
+  currentPage : number = 1;
+
   //#endregion
 
   //#region EventHandlers
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  ChangePage(index : number): void{
+    this.currentPage = index;
+
     this.getAll();
   }
 

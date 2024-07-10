@@ -21,7 +21,6 @@
           </tr>
         </thead>
         <tbody>
-  
           <tr *ngFor="let item of mainData; let i = index">
             <td>
               <button class="component-table-trash" (click)="DeleteItem(item.id)">
@@ -43,11 +42,26 @@
         </tbody>
       </table>
     </div>
+
+    <div class="pagination-main" >
+
+      <button [disabled]="currentPage == 0" (click)="ChangePage(currentPage-1)">
+        <i class="fa-solid fa-caret-left"></i>
+      </button>
+      
+      <button *ngFor="let a of dataCount; let index = index" [ngClass]="{'activeClass' : currentPage == index}" (click)="ChangePage(index)">
+        <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
+      </button>
+
+      <button [disabled]="currentPage == dataCount.length-1" (click)="ChangePage(currentPage+1)">
+        <i class="fa-solid fa-caret-right"></i>
+      </button>
+
+    </div>
   </div>
   
   <div *ngIf="crudPopupVisible" class="component-crud-popup">
     <div class="component-crud-popup-main">
-  
       <div class="component-crud-popup-header w-100 d-flex justify-content-end">
         <button class="crud-popup-close-button" (click)="CrudPopupClose()">
           <i class="fa-solid fa-x"></i>

@@ -3,6 +3,8 @@
   height: 100%;
   padding-top: 20px;
   letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
   * {
     transition: 0.2s;
   }
@@ -89,6 +91,7 @@
     height: 92%;
     margin-top: 20px;
     overflow-y: auto;
+
     .component-table {
       width: 100%;
       max-height: 500px;
@@ -104,23 +107,28 @@
       thead {
         background-color: #372a4b;
         color: white;
+
         th {
           padding: 14px;
         }
       }
+
       td {
         padding: 10px;
         font-size: 18px;
         transition: 0.3s;
       }
+
       tbody tr {
         background-color: #f0f0f0;
         color: #464646;
         transition: 0.1s;
         font-weight: 500;
+
         &:nth-child(even) {
           background-color: #fffdfd;
         }
+
         &:hover {
           background-color: #dadada;
         }
@@ -128,6 +136,7 @@
     }
   }
 }
+
 .component-crud-popup {
   position: absolute;
   top: 0;
@@ -156,6 +165,7 @@
 
   .form-input-label {
     padding: 8px 12px;
+
     input {
       height: 60px;
       padding: 5px 7px;
@@ -166,6 +176,7 @@
       border-bottom: 4px solid #381e69;
       outline: none;
       font-weight: 500;
+
       &::placeholder {
         color: rgb(48, 48, 48);
         font-weight: 400;
@@ -215,6 +226,7 @@
 .form-input-label {
   padding: 5px;
   margin: 0;
+
   .formInput {
     width: 100%;
   }
@@ -224,6 +236,7 @@
   background-color: transparent;
   border: none;
   color: #372a4b;
+
   &:hover {
     color: #503d6b;
     // transform: ;
@@ -231,7 +244,7 @@
   }
 }
 
-.validation-error{
+.validation-error {
   color: red;
 }
 
@@ -259,3 +272,15 @@
 
 
 
+.component-main .pagination-main {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button{
+    width: 40px;
+    height: 40px;
+
+  }
+}
