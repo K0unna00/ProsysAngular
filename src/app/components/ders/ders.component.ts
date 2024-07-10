@@ -68,11 +68,21 @@ export class DersComponent implements OnInit {
 
   listCount: number = 0;
 
+  dataCount: Array<number> = new Array(6);
+
+  currentPage : number = 1;
+
   //#endregion
 
   //#region EventHandlers
 
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  ChangePage(index : number): void{
+    this.currentPage = index;
+
     this.getAll();
   }
 

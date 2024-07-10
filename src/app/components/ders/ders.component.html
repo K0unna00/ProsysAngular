@@ -45,16 +45,20 @@
       </table>
   </div>
   <div class="pagination-main">
-    <button>
+
+    <button [disabled]="currentPage == 0" (click)="ChangePage(currentPage-1)">
       <i class="fa-solid fa-caret-left"></i>
     </button>
-    <button><i class="fa-solid fa-1"></i></button>
-    <button><i class="fa-solid fa-2"></i></button>
-    <button><i class="fa-solid fa-3"></i></button>
-    <button><i class="fa-solid fa-4"></i></button>
-    <button>
+
+    <button *ngFor="let a of dataCount; let index = index" [ngClass]="{'activeClass' : currentPage == index}"
+      (click)="ChangePage(index)">
+      <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
+    </button>
+
+    <button [disabled]="currentPage == dataCount.length-1" (click)="ChangePage(currentPage+1)">
       <i class="fa-solid fa-caret-right"></i>
     </button>
+
   </div>
 </div>
 

@@ -1,108 +1,108 @@
 <div class="component-main">
-    <div class="component-header">
-      <div class="component-header-text">
-        Şagirdlər
-      </div>
-      <div class="component-crud-button" (click)="CrudPopupOpen()">
-        <i class="fa-solid fa-square-plus"></i>
-        Əlavə et
-      </div>
+  <div class="component-header">
+    <div class="component-header-text">
+      Şagirdlər
     </div>
-    <div class="component-body">
-      <table class="component-table">
-        <thead>
-          <tr>
-            <th>Actions</th>
-            <th>№</th>
-            <th>Adı</th>
-            <th>Soyadı</th>
-            <th>Nömrə</th>
-            <th>Sinifi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of mainData; let i = index">
-            <td>
-              <button class="component-table-trash" (click)="DeleteItem(item.id)">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-
-              <button class="component-table-trash ms-4" (click)="UpdatePopupOpen(item)">
-                <i class="fa-solid fa-pencil"></i>
-              </button>
-            </td>
-            <td>
-              {{ i + 1 }}
-            </td>
-            <td>{{item.name}}</td>
-            <td>{{item.surname}}</td>
-            <td>{{item.number}}</td>
-            <td>{{item.class}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="pagination-main" >
-
-      <button [disabled]="currentPage == 0" (click)="ChangePage(currentPage-1)">
-        <i class="fa-solid fa-caret-left"></i>
-      </button>
-      
-      <button *ngFor="let a of dataCount; let index = index" [ngClass]="{'activeClass' : currentPage == index}" (click)="ChangePage(index)">
-        <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
-      </button>
-
-      <button [disabled]="currentPage == dataCount.length-1" (click)="ChangePage(currentPage+1)">
-        <i class="fa-solid fa-caret-right"></i>
-      </button>
-
+    <div class="component-crud-button" (click)="CrudPopupOpen()">
+      <i class="fa-solid fa-square-plus"></i>
+      Əlavə et
     </div>
   </div>
-  
-  <div *ngIf="crudPopupVisible" class="component-crud-popup">
-    <div class="component-crud-popup-main">
-      <div class="component-crud-popup-header w-100 d-flex justify-content-end">
-        <button class="crud-popup-close-button" (click)="CrudPopupClose()">
-          <i class="fa-solid fa-x"></i>
-        </button>
-      </div>
-  
-      <div class="component-crud-popup-body gap-2">
-        <form [formGroup]="frm" (ngSubmit)="CreateUpdate()" id="ngForm">
-          <div class="d-flex flex-wrap justify-content-between">
-            <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="ad" placeholder="Ad" >
-              <div class="validation-error" *ngIf="!ad.valid && (ad.dirty || ad.touched)">
-                Ad boş və ya 30 elementdən uzun ola bilməz!
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="text" formControlName="soyad" placeholder="Soyad"  >
-              <div class="validation-error" *ngIf="!soyad.valid && (soyad.dirty || soyad.touched)">
-                Soyad boş və ya 30 elementdən uzun ola bilməz!
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
-              <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
-                Sinif boş və ya 2 elementdən uzun ola bilməz!
-              </div>
-            </div>
-            <div class="form-input-label col-6">
-              <input class="formInput" type="number" formControlName="nomre" placeholder="Nömrə" >
-              <div class="validation-error" *ngIf="!nomre.valid && (nomre.dirty || nomre.touched)">
-                Nömrə boş və ya 5 elementdən uzun ola bilməz!
-              </div>
+  <div class="component-body">
+    <table class="component-table">
+      <thead>
+        <tr>
+          <th>Actions</th>
+          <th>№</th>
+          <th>Adı</th>
+          <th>Soyadı</th>
+          <th>Nömrə</th>
+          <th>Sinifi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mainData; let i = index">
+          <td>
+            <button class="component-table-trash" (click)="DeleteItem(item.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+
+            <button class="component-table-trash ms-4" (click)="UpdatePopupOpen(item)">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </td>
+          <td>
+            {{ i + 1 }}
+          </td>
+          <td>{{item.name}}</td>
+          <td>{{item.surname}}</td>
+          <td>{{item.number}}</td>
+          <td>{{item.class}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-main">
+
+    <button [disabled]="currentPage == 0" (click)="ChangePage(currentPage-1)">
+      <i class="fa-solid fa-caret-left"></i>
+    </button>
+
+    <button *ngFor="let a of dataCount; let index = index" [ngClass]="{'activeClass' : currentPage == index}"
+      (click)="ChangePage(index)">
+      <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
+    </button>
+
+    <button [disabled]="currentPage == dataCount.length-1" (click)="ChangePage(currentPage+1)">
+      <i class="fa-solid fa-caret-right"></i>
+    </button>
+
+  </div>
+</div>
+
+<div *ngIf="crudPopupVisible" class="component-crud-popup">
+  <div class="component-crud-popup-main">
+    <div class="component-crud-popup-header w-100 d-flex justify-content-end">
+      <button class="crud-popup-close-button" (click)="CrudPopupClose()">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </div>
+
+    <div class="component-crud-popup-body gap-2">
+      <form [formGroup]="frm" (ngSubmit)="CreateUpdate()" id="ngForm">
+        <div class="d-flex flex-wrap justify-content-between">
+          <div class="form-input-label col-6">
+            <input class="formInput" type="text" formControlName="ad" placeholder="Ad">
+            <div class="validation-error" *ngIf="!ad.valid && (ad.dirty || ad.touched)">
+              Ad boş və ya 30 elementdən uzun ola bilməz!
             </div>
           </div>
-        </form>
-      </div>
-      <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
-        <button form="ngForm" class="crud-popup-save-button">
-          <i class="fa-solid fa-check"></i>
-          Yadda saxla
-        </button>
-      </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="text" formControlName="soyad" placeholder="Soyad">
+            <div class="validation-error" *ngIf="!soyad.valid && (soyad.dirty || soyad.touched)">
+              Soyad boş və ya 30 elementdən uzun ola bilməz!
+            </div>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="number" formControlName="sinif" placeholder="Sinifi">
+            <div class="validation-error" *ngIf="!sinif.valid && (sinif.dirty || sinif.touched)">
+              Sinif boş və ya 2 elementdən uzun ola bilməz!
+            </div>
+          </div>
+          <div class="form-input-label col-6">
+            <input class="formInput" type="number" formControlName="nomre" placeholder="Nömrə">
+            <div class="validation-error" *ngIf="!nomre.valid && (nomre.dirty || nomre.touched)">
+              Nömrə boş və ya 5 elementdən uzun ola bilməz!
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="component-crud-popup-footer w-100 d-flex justify-content-end">
+      <button form="ngForm" class="crud-popup-save-button">
+        <i class="fa-solid fa-check"></i>
+        Yadda saxla
+      </button>
     </div>
   </div>
+</div>
