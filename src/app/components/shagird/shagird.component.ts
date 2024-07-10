@@ -95,8 +95,12 @@ export class ShagirdComponent implements OnInit {
   }
 
   getAll() {
+
+    this.spinnerService.showSpinner(true);
     this.shagirdService.getAll().subscribe(rs => {
       this.mainData = rs;
+
+      this.spinnerService.showSpinner(false);
     });
   }
 
