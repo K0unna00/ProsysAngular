@@ -1,0 +1,17 @@
+<div class="pagination-main">
+
+    <button [disabled]="currentPage == 0" (click)="ChangePage(currentPage-1)">
+      <i class="fa-solid fa-caret-left"></i>
+    </button>
+
+    <button *ngFor="let a of dataCountArray; let index = index" 
+        [ngClass]="{'activeClass' : currentPage == index}"
+        (click)="ChangePage(index)">
+      <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
+    </button>
+
+    <button [disabled]="currentPage == dataCountArray.length-1" (click)="ChangePage(currentPage+1)">
+      <i class="fa-solid fa-caret-right"></i>
+    </button>
+
+  </div>

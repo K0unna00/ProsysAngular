@@ -71,7 +71,7 @@ export class ShagirdComponent implements OnInit {
 
   currentPage: number = 0;
 
-  currentPageSize: number = 10;
+  currentPageSize: number = 15;
 
   //#endregion
 
