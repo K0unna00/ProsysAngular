@@ -108,12 +108,12 @@ export class ShagirdComponent implements OnInit {
   GetAllPagination() {
 
     this.spinnerService.showSpinner(true);
+    
     this.shagirdService.getAllPagination(this.currentPage,this.currentPageSize).subscribe((rs: PaginationResponse<Shagird>) => {
 
       this.dataCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
 
       console.log(Math.ceil(rs.totalCount / this.currentPageSize));
-
 
       this.mainData = rs.response;
 

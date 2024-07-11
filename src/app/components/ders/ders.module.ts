@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DersComponent } from './ders.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaginationModule } from '../pagination/pagination.module';
 
 
 
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    PaginationModule,
     RouterModule.forChild([
       { path: "", component: DersComponent }
     ])

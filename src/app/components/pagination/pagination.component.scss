@@ -1,0 +1,23 @@
+.pagination-main {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    button {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: #372a4b;
+      color: white;
+      transition: 0.2s;
+      &.activeClass{
+        background-color: #5d376e;
+      }
+      &:disabled{
+        background-color: #4d4658;
+        color: rgb(197, 197, 197);
+      }
+    }
+  }

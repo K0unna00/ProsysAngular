@@ -4,6 +4,7 @@ import { Ders } from '../../models/ders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from '../../services/common/toast.service';
 import { SpinnerService } from '../../services/common/spinner.service';
+import { PaginationResponse } from '../../models/paginationResponse';
 
 @Component({
   selector: 'app-ders',
@@ -68,22 +69,24 @@ export class DersComponent implements OnInit {
 
   listCount: number = 0;
 
-  dataCount: Array<number> = new Array(6);
+  dataCount: Array<number> = new Array(0);
 
-  currentPage : number = 1;
+  currentPage : number = 0;
+
+  currentPageSize: number = 15;
 
   //#endregion
 
   //#region EventHandlers
 
   ngOnInit(): void {
-    this.getAll();
+    this.GetAllPagination();
   }
 
   ChangePage(index : number): void{
     this.currentPage = index;
 
-    this.getAll();
+    this.GetAllPagination();
   }
 
   CrudPopupOpen(): void {
@@ -105,11 +108,16 @@ export class DersComponent implements OnInit {
     this.crudPopupVisible = true;
   }
 
-  getAll() {
-    this.spinnerService.showSpinner(true);
+  GetAllPagination() {
 
-    this.dersService.getAll().subscribe(rs => {
-      this.mainData = rs;
+    this.spinnerService.showSpinner(true);
+    
+    this.dersService.getAllPagination(this.currentPage,this.currentPageSize).subscribe((rs: PaginationResponse<Ders>) => {
+
+      this.dataCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
+
+      this.mainData = rs.response;
+
       this.spinnerService.showSpinner(false);
     });
   }
@@ -129,7 +137,7 @@ export class DersComponent implements OnInit {
         ders.id = this.id.value;
         this.dersService.update(ders).subscribe({
           next: data => {
-            this.getAll();
+            this.GetAllPagination();
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
@@ -145,7 +153,7 @@ export class DersComponent implements OnInit {
       else{
         this.dersService.create(ders).subscribe({
           next: data => {
-            this.getAll();
+            this.GetAllPagination();
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
@@ -168,7 +176,7 @@ export class DersComponent implements OnInit {
     this.dersService.deleteItem(id).subscribe({
       next: result => {
         console.log(result);
-        this.getAll();
+        this.GetAllPagination();
         this.toastService.showToast(true);
         this.spinnerService.showSpinner(false);
       },
