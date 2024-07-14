@@ -59,7 +59,7 @@ export class DersComponent implements OnInit {
 
 
   //#endregion
-
+  
   //#region Data
   public mainData: Ders[];
 

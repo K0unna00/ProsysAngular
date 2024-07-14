@@ -8,6 +8,7 @@ import { Shagird } from '../../models/shagird';
 import { ShagirdService } from '../../services/model/shagird/shagird.service';
 import { ToastService } from '../../services/common/toast.service';
 import { SpinnerService } from '../../services/common/spinner.service';
+import { PaginationResponse } from '../../models/paginationResponse';
 
 @Component({
   selector: 'app-imtahan',
@@ -68,18 +69,41 @@ export class ImtahanComponent implements OnInit {
 
   public crudPopupVisible: boolean = false;
 
-  listCount: number = 0;
-
   public crudStatus: boolean;
+
+  pageCount: Array<number> = new Array(0);
+
+  currentPage : number = 0;
+
+  currentPageSize: number = 15;
 
   //#endregion
 
   //#region EventHandlers
 
   ngOnInit(): void {
-    this.getAll();
+    this.GetAllPagination();
     this.getDersKod();
     this.getShagirdNomre();
+  }
+
+  ChangePage(index : number): void{
+    this.currentPage = index;
+    this.GetAllPagination();
+  }
+
+  GetAllPagination() {
+
+    this.spinnerService.showSpinner(true);
+    
+    this.imtahanService.getAllPagination(this.currentPage,this.currentPageSize).subscribe((rs: PaginationResponse<Imtahan>) => {
+
+      this.pageCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
+
+      this.mainData = rs.response;
+
+      this.spinnerService.showSpinner(false);
+    });
   }
 
   UpdatePopupOpen(imtahan: Imtahan) {
@@ -105,21 +129,21 @@ export class ImtahanComponent implements OnInit {
     this.crudPopupVisible = false;
   }
 
-  getAll() {
+  // GetAllPagination() {
 
-    this.spinnerService.showSpinner(true);
+  //   this.spinnerService.showSpinner(true);
 
-    this.imtahanService.getAll().subscribe({
-      next: rs => {
-        this.mainData = rs;
-        this.spinnerService.showSpinner(false);
-      },
-      error(err) {
-        console.log(err);
-        this.spinnerService.showSpinner(false);
-      },
-    });
-  }
+  //   this.imtahanService.GetAllPagination().subscribe({
+  //     next: rs => {
+  //       this.mainData = rs;
+  //       this.spinnerService.showSpinner(false);
+  //     },
+  //     error(err) {
+  //       console.log(err);
+  //       this.spinnerService.showSpinner(false);
+  //     },
+  //   });
+  // }
 
   getDersKod() {
     this.spinnerService.showSpinner(true);
@@ -154,7 +178,7 @@ export class ImtahanComponent implements OnInit {
 
         this.imtahanService.update(imtahan).subscribe({
           next: data => {
-            this.getAll();
+            this.GetAllPagination();
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
@@ -172,7 +196,14 @@ export class ImtahanComponent implements OnInit {
       else {
         this.imtahanService.create(imtahan).subscribe({
           next: data => {
-            this.getAll();
+
+            if (this.mainData.length == this.currentPageSize)
+
+              this.currentPage++;
+    
+            this.ChangePage(this.currentPage);
+
+            this.GetAllPagination();
             this.frm.reset();
             this.crudPopupVisible = false;
             this.toastService.showToast(true);
@@ -195,8 +226,14 @@ export class ImtahanComponent implements OnInit {
 
     this.imtahanService.deleteItem(id).subscribe({
       next: result => {
-        console.log(result);
-        this.getAll();
+
+        if (this.mainData.length == 1)
+
+          this.currentPage = this.currentPage != 0 ? this.currentPage - 1 : 0;
+
+        this.ChangePage(this.currentPage);
+        
+        this.GetAllPagination();
         this.toastService.showToast(true);
         this.spinnerService.showSpinner(false);
       },
