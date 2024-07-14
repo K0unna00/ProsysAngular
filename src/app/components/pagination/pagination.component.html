@@ -6,6 +6,7 @@
 
     <button *ngFor="let a of dataCountArray; let index = index" 
         [ngClass]="{'activeClass' : currentPage == index}"
+        [disabled]="currentPage == index"
         (click)="ChangePage(index)">
       <i [ngClass]="'fa-solid fa-'+ (index + 1)"></i>
     </button>
