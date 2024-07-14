@@ -67,9 +67,9 @@ export class ShagirdComponent implements OnInit {
 
   listCount: number = 0;
 
-  dataCount: Array<number> = new Array(6);
+  pageCount: Array<number> = new Array(0);
 
-  currentPage: number = 0;
+  currentPage : number = 0;
 
   currentPageSize: number = 15;
 
@@ -111,14 +111,13 @@ export class ShagirdComponent implements OnInit {
     
     this.shagirdService.getAllPagination(this.currentPage,this.currentPageSize).subscribe((rs: PaginationResponse<Shagird>) => {
 
-      this.dataCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
+      this.pageCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
 
       console.log(Math.ceil(rs.totalCount / this.currentPageSize));
 
       this.mainData = rs.response;
 
       console.log(rs);
-
 
       this.spinnerService.showSpinner(false);
     });

@@ -67,8 +67,6 @@ export class DersComponent implements OnInit {
 
   public crudStatus : boolean;
 
-  listCount: number = 0;
-
   pageCount: Array<number> = new Array(0);
 
   currentPage : number = 0;
@@ -152,6 +150,13 @@ export class DersComponent implements OnInit {
       else{
         this.dersService.create(ders).subscribe({
           next: data => {
+
+            if (this.mainData.length == this.currentPageSize)
+
+              this.currentPage++;
+    
+            this.ChangePage(this.currentPage);
+
             this.GetAllPagination();
             this.frm.reset();
             this.crudPopupVisible = false;
@@ -174,7 +179,13 @@ export class DersComponent implements OnInit {
 
     this.dersService.deleteItem(id).subscribe({
       next: result => {
-        console.log(result);
+
+        if (this.mainData.length == 1)
+
+          this.currentPage = this.currentPage != 0 ? this.currentPage - 1 : 0;
+
+        this.ChangePage(this.currentPage);
+
         this.GetAllPagination();
         this.toastService.showToast(true);
         this.spinnerService.showSpinner(false);
