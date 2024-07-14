@@ -44,7 +44,7 @@
         </tbody>
       </table>
   </div>
-  <app-pagination [currentPage]="currentPage" [dataCount]="dataCount.length"></app-pagination>
+  <app-pagination [currentPage]="currentPage" [pageCount]="pageCount.length" (pageChanged)="ChangePage($event)"></app-pagination>
 </div>
 
 <div *ngIf="crudPopupVisible" class="component-crud-popup">

@@ -8,14 +8,14 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 export class PaginationComponent implements OnChanges {
 
   @Input() currentPage: number = 0;
-  @Input() dataCount: number = 0;
+  @Input() pageCount: number = 0;
   @Output() pageChanged = new EventEmitter<number>();
 
   dataCountArray: number[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['dataCount']) {
-      this.dataCountArray = Array(this.dataCount).fill(0);
+    if (changes['pageCount']) {
+      this.dataCountArray = Array(this.pageCount).fill(0);
     }
   }
 

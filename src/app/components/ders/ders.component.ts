@@ -69,7 +69,7 @@ export class DersComponent implements OnInit {
 
   listCount: number = 0;
 
-  dataCount: Array<number> = new Array(0);
+  pageCount: Array<number> = new Array(0);
 
   currentPage : number = 0;
 
@@ -85,7 +85,6 @@ export class DersComponent implements OnInit {
 
   ChangePage(index : number): void{
     this.currentPage = index;
-
     this.GetAllPagination();
   }
 
@@ -114,7 +113,7 @@ export class DersComponent implements OnInit {
     
     this.dersService.getAllPagination(this.currentPage,this.currentPageSize).subscribe((rs: PaginationResponse<Ders>) => {
 
-      this.dataCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
+      this.pageCount = new Array(Math.ceil(rs.totalCount / this.currentPageSize));
 
       this.mainData = rs.response;
 
