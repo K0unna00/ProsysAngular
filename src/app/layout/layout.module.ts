@@ -5,6 +5,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SpinnerComponent } from './spinner/spinner/spinner.component';
   ],
   imports: [
     CommonModule,
+    LoginModule,
     RouterModule
   ],
   exports: [

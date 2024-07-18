@@ -4,11 +4,13 @@ import { DersComponent } from './components/ders/ders.component';
 import { ImtahanComponent } from './components/imtahan/imtahan.component';
 import { ShagirdComponent } from './components/shagird/shagird.component';
 import { HomeComponent } from './layout/home/home.component';
+import { LoginComponent } from './layout/login/login.component';
 
 const routes: Routes = [
   {path: "ders", component: DersComponent},
   {path: "imtahan", component: ImtahanComponent},
   {path: "shagird", component: ShagirdComponent},
+  {path: "login", component: LoginComponent},
   {path: "", component: HomeComponent},
 
   {path: "**" , redirectTo: ""}

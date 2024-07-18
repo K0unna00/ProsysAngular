@@ -1,0 +1,82 @@
+.component-main {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    * {
+      transition: 0.2s;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .component-header {
+      display: flex;
+      justify-content: space-between;
+      height: 5%;
+  
+      .component-header-text {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    }
+
+    .component-body{
+      width: 75%;
+      margin: 0 auto;
+    }
+  
+}
+  
+  .crud-popup-save-button {
+    width: fit-content;
+    height: 40px;
+    border-radius: 4px;
+    border: 0;
+    color: white;
+    background-color: #372a4b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    padding: 5px 15px;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  }
+  
+  .component-crud-popup-header {
+    flex: 1;
+  }
+  
+  .component-crud-popup-body {
+    flex: 6;
+  }
+  
+  .component-crud-popup-footer {
+    flex: 1;
+  }
+  .validation-error {
+    color: red;
+  }
+  
+
+  .form-input-label {
+    padding: 8px 12px !important;
+    
+    input {
+      height: 60px;
+      padding: 5px 7px;
+      font-size: 22px;
+      color: #381e69;
+      border: 0;
+      border-bottom: 4px solid #381e69;
+      outline: none;
+      font-weight: 500;
+      width: 100%;
+      &::placeholder {
+        color: rgb(48, 48, 48);
+        font-weight: 400;
+      }
+    }
+  }

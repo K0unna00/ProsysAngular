@@ -80,6 +80,13 @@
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
 
+.loginButton{
+  margin-top: auto;
+  a{
+    display: inline-block !important;
+  }
+}
+
 // .prosysLogo{
 //   // position: absolute;
 //   top: 25px;

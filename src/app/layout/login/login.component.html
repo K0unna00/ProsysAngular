@@ -1,0 +1,31 @@
+<div class="component-main">
+    <div class="component-header">
+        <div class="component-header-text">
+            Login
+        </div>
+    </div>
+    <div class="component-body gap-2">
+        <form [formGroup]="frm" (ngSubmit)="LoginSubmit()" id="ngForm">
+            <div class="d-flex flex-wrap justify-content-between">
+                <div class="form-input-label col-12">
+                    <input class="formInput" type="text" formControlName="dersad" placeholder="Username">
+                    <div class="validation-error" *ngIf="!userName.valid && (userName.dirty || userName.touched)">
+                        Username boş ola bilməz!
+                    </div>
+                </div>
+                <div class="form-input-label col-12">
+                    <input class="formInput" type="text" formControlName="derskod" placeholder="Password">
+                    <div class="validation-error" *ngIf="!password.valid && (password.dirty || password.touched)">
+                        Password boş ola bilməz!
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="component-crud-popup-footer w-100 d-flex justify-content-end mt-5">
+            <button form="ngForm" class="crud-popup-save-button">
+                <i class="fa-solid fa-check"></i>
+                Yadda saxla
+            </button>
+        </div>
+    </div>
+</div>
